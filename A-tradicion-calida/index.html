@@ -319,16 +319,16 @@ tailwind.config = {
           </svg>
         </span>
       </h1>
-      <p data-hero-p class="mt-8 font-serif text-lg lg:text-xl max-w-xl text-ink-2 leading-relaxed">
+      <p data-hero-p class="mt-6 lg:mt-8 font-serif text-base lg:text-xl max-w-xl text-ink-2 leading-relaxed">
         Una colección de sabores caseros, recetas familiares e ingredientes reales — heredada generación tras generación y servida hoy a tu mesa.
         <em class="text-red">Sin tendencias, solo memoria del paladar.</em>
       </p>
-      <div data-hero-cta class="mt-10 flex flex-wrap items-center gap-5">
-        <a href="#capitulo-1" class="magnetic inline-flex items-center gap-3 bg-ink text-cream font-serif italic text-lg px-8 py-4 rounded-full hover:bg-red transition group">
+      <div data-hero-cta class="mt-8 lg:mt-10 flex flex-wrap items-center gap-3 sm:gap-5">
+        <a href="#capitulo-1" class="magnetic inline-flex items-center gap-3 bg-ink text-cream font-serif italic text-base lg:text-lg px-6 lg:px-8 py-3.5 lg:py-4 rounded-full hover:bg-red transition group">
           Abrir el cuaderno
           <span class="transition group-hover:translate-x-1">→</span>
         </a>
-        <a href="#galletas" class="font-hand text-2xl text-red hover:underline">o ve directo a las galletas →</a>
+        <a href="#galletas" class="font-hand text-xl lg:text-2xl text-red hover:underline">o ve directo a las galletas →</a>
       </div>
       <div data-hero-tag class="mt-14 flex items-center gap-4 font-type text-xs uppercase tracking-[.2em] text-muted">
         <svg width="14" height="14" viewBox="0 0 14 14" class="animate-bounce"><path d="M7 0v14M3 10l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
@@ -386,17 +386,17 @@ tailwind.config = {
 
 <!-- CAPÍTULO 1: STICKY STORYTELLING -->
 <section id="capitulo-1" class="relative paper-bg">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 text-center">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-12 lg:py-20 text-center">
     <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo I —</div>
-    <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+    <h2 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink leading-tight">
       Una historia que se cuenta <span class="font-hand text-red italic">en cada bocado</span>.
     </h2>
   </div>
 
   <div id="story-pin" class="relative">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-start">
-      <!-- LEFT: pinned image stack -->
-      <div class="lg:sticky lg:top-32 self-start">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <!-- LEFT: pinned image stack (desktop only) -->
+      <div class="hidden lg:block lg:sticky lg:top-32 self-start">
         <div class="relative h-[560px]">
           <div data-story-img="1" class="polaroid absolute inset-0 transition-all duration-700 ease-out">
             <span class="tape"></span>
@@ -422,40 +422,64 @@ tailwind.config = {
       </div>
 
       <!-- RIGHT: story beats -->
-      <div class="space-y-32 py-20">
+      <div class="space-y-16 lg:space-y-32 py-10 lg:py-20">
         <div class="beat is-active" data-story-beat="1">
+          <!-- Mobile polaroid (lg:hidden) -->
+          <div class="lg:hidden polaroid relative max-w-sm mx-auto mb-8" style="transform: rotate(-1.5deg);">
+            <span class="tape" style=""></span>
+            <img src="../assets/imagenes/postres/p001_img01_1850x1236.png" alt="Las 4 galletas" class="w-full h-[260px] sm:h-[320px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-ink-2">las cuatro recetas</div>
+          </div>
           <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 12</div>
-          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+          <h3 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight text-ink">
             Todo empieza en una <span class="font-hand text-red italic">cocina pequeña</span>.
           </h3>
-          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+          <p class="mt-4 lg:mt-5 text-base lg:text-lg leading-relaxed text-ink-2 font-serif">
             La abuela no usaba balanza ni cronómetro. Medía con las manos, sentía la masa, escuchaba el horno. Cada receta de este cuaderno nace de ese instinto.
           </p>
         </div>
         <div class="beat" data-story-beat="2">
+          <!-- Mobile polaroid (lg:hidden) -->
+          <div class="lg:hidden polaroid relative max-w-sm mx-auto mb-8" style="transform: rotate(1.5deg);">
+            <span class="tape" style="background:rgba(164,130,58,.6);"></span>
+            <img src="../assets/imagenes/catalogo/p001_img02_3380x5070.jpeg" alt="La mesa familiar" class="w-full h-[260px] sm:h-[320px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-ink-2">la mesa familiar</div>
+          </div>
           <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 27</div>
-          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+          <h3 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight text-ink">
             Una mesa que siempre tiene <span class="font-hand text-red italic">espacio para uno más</span>.
           </h3>
-          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+          <p class="mt-4 lg:mt-5 text-base lg:text-lg leading-relaxed text-ink-2 font-serif">
             Las recetas se compartían sin recelo, anotadas en servilletas y al margen de los libros. Esa generosidad es lo que cocinamos hoy.
           </p>
         </div>
         <div class="beat" data-story-beat="3">
+          <!-- Mobile polaroid (lg:hidden) -->
+          <div class="lg:hidden polaroid relative max-w-sm mx-auto mb-8" style="transform: rotate(-1deg);">
+            <span class="tape" style="background:rgba(185,34,20,0.55);"></span>
+            <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake" class="w-full h-[260px] sm:h-[320px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-ink-2">probada y aprobada</div>
+          </div>
           <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 54</div>
-          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+          <h3 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight text-ink">
             Probada y aprobada por <span class="font-hand text-red italic">tres generaciones</span>.
           </h3>
-          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+          <p class="mt-4 lg:mt-5 text-base lg:text-lg leading-relaxed text-ink-2 font-serif">
             Cada producto pasa por la prueba más exigente: la de la familia. Si no le gusta a la abuela, no sale del cuaderno.
           </p>
         </div>
         <div class="beat" data-story-beat="4">
+          <!-- Mobile polaroid (lg:hidden) -->
+          <div class="lg:hidden polaroid relative max-w-sm mx-auto mb-8" style="transform: rotate(2deg);">
+            <span class="tape" style=""></span>
+            <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada de chocolate" class="w-full h-[260px] sm:h-[320px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-ink-2">para celebrar</div>
+          </div>
           <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 88</div>
-          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+          <h3 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight text-ink">
             Para celebrar lo de siempre <span class="font-hand text-red italic">como nunca</span>.
           </h3>
-          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+          <p class="mt-4 lg:mt-5 text-base lg:text-lg leading-relaxed text-ink-2 font-serif">
             Postres para los días grandes y galletas para los pequeños. Una marca completa con una sola alma — y muchas mesas que la esperan.
           </p>
           <a href="#galletas" class="mt-8 inline-flex items-center gap-2 font-hand text-3xl text-red hover:text-red-2 transition">
@@ -468,32 +492,32 @@ tailwind.config = {
 </section>
 
 <!-- CAPÍTULO 2: HORIZONTAL SCROLL GALLETAS -->
-<section id="galletas" class="paper-deep relative py-24 overflow-hidden">
+<section id="galletas" class="paper-deep relative py-16 lg:py-24 overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 mb-12">
     <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo II —</div>
-    <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+    <h2 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink leading-tight">
       Cuatro recetas, <span class="font-hand text-red italic">una obsesión</span>.
     </h2>
-    <p class="mt-4 font-serif text-lg text-ink-2 max-w-2xl">Cada galleta tiene su propia tarjeta de recetas. Desliza →</p>
+    <p class="mt-4 font-serif text-base lg:text-lg text-ink-2 max-w-2xl">Cada galleta tiene su propia tarjeta de recetas. Desliza →</p>
   </div>
 
   <div id="horizontal-pin" class="relative">
     <div id="horizontal-track" class="flex gap-10 px-6 lg:px-10 will-change-transform">
       <!-- Recipe Card 1 -->
-      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[-1deg]">
+      <article class="recipe-card w-[300px] sm:w-[360px] lg:w-[420px] shrink-0 p-5 sm:p-6 lg:p-8 rotate-[-1deg]">
         <div class="flex items-start justify-between mb-5">
           <div>
             <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 01</div>
-            <h3 class="font-hand text-5xl text-red mt-1">Cookie Monster</h3>
+            <h3 class="font-hand text-3xl sm:text-4xl lg:text-5xl text-red mt-1">Cookie Monster</h3>
             <div class="font-type text-xs text-muted mt-1">85 g · relleno 100% Nutella</div>
           </div>
-          <span class="font-display text-4xl text-ink">$2.50</span>
+          <span class="font-display text-2xl sm:text-3xl lg:text-4xl text-ink">$2.50</span>
         </div>
         <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
           <img src="../assets/imagenes/postres/p001_img02_761x760.jpeg" class="w-full h-full object-cover" alt="Cookie Monster" />
           <div class="absolute top-3 right-3 bg-red text-cream font-hand text-lg px-3 py-1 rounded-full rotate-6">¡azul!</div>
         </div>
-        <div class="font-hand text-xl text-ink-2 leading-tight">
+        <div class="font-hand text-base lg:text-xl text-ink-2 leading-tight">
           "Galleta juguetona — azul vibrante, ojitos de chocolate, lluvia de líneas cremosas. La favorita de los chicos."
         </div>
         <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
@@ -502,20 +526,20 @@ tailwind.config = {
         </div>
       </article>
       <!-- Recipe Card 2 -->
-      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[1deg]">
+      <article class="recipe-card w-[300px] sm:w-[360px] lg:w-[420px] shrink-0 p-5 sm:p-6 lg:p-8 rotate-[1deg]">
         <div class="flex items-start justify-between mb-5">
           <div>
             <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 02</div>
-            <h3 class="font-hand text-5xl text-red mt-1">Red Velvet</h3>
+            <h3 class="font-hand text-3xl sm:text-4xl lg:text-5xl text-red mt-1">Red Velvet</h3>
             <div class="font-type text-xs text-muted mt-1">85 g · frosting de queso crema</div>
           </div>
-          <span class="font-display text-4xl text-ink">$2.50</span>
+          <span class="font-display text-2xl sm:text-3xl lg:text-4xl text-ink">$2.50</span>
         </div>
         <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
           <img src="../assets/imagenes/postres/p001_img03_761x760.jpeg" class="w-full h-full object-cover" alt="Red Velvet" />
           <div class="absolute top-3 right-3 bg-ink text-cream font-hand text-lg px-3 py-1 rounded-full -rotate-3">¡vistosa!</div>
         </div>
-        <div class="font-hand text-xl text-ink-2 leading-tight">
+        <div class="font-hand text-base lg:text-xl text-ink-2 leading-tight">
           "Miga aterciopelada estilo pastel red velvet, centro de frosting y filigranas de chocolate. Un capricho elegante."
         </div>
         <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
@@ -524,20 +548,20 @@ tailwind.config = {
         </div>
       </article>
       <!-- Recipe Card 3 -->
-      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[-1deg]">
+      <article class="recipe-card w-[300px] sm:w-[360px] lg:w-[420px] shrink-0 p-5 sm:p-6 lg:p-8 rotate-[-1deg]">
         <div class="flex items-start justify-between mb-5">
           <div>
             <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 03</div>
-            <h3 class="font-hand text-5xl text-red mt-1">Zanahoria</h3>
+            <h3 class="font-hand text-3xl sm:text-4xl lg:text-5xl text-red mt-1">Zanahoria</h3>
             <div class="font-type text-xs text-muted mt-1">85 g · estilo carrot cake</div>
           </div>
-          <span class="font-display text-4xl text-ink">$2.50</span>
+          <span class="font-display text-2xl sm:text-3xl lg:text-4xl text-ink">$2.50</span>
         </div>
         <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
           <img src="../assets/imagenes/postres/p001_img04_766x765.jpeg" class="w-full h-full object-cover" alt="Zanahoria" />
           <div class="absolute top-3 right-3 bg-gold text-cream font-hand text-lg px-3 py-1 rounded-full rotate-3">¡balanceada!</div>
         </div>
-        <div class="font-hand text-xl text-ink-2 leading-tight">
+        <div class="font-hand text-base lg:text-xl text-ink-2 leading-tight">
           "Trocitos de zanahoria, avena, nueces tostadas. Dulzor justo y centro de frosting para el toque goloso."
         </div>
         <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
@@ -546,20 +570,20 @@ tailwind.config = {
         </div>
       </article>
       <!-- Recipe Card 4 -->
-      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[1deg]">
+      <article class="recipe-card w-[300px] sm:w-[360px] lg:w-[420px] shrink-0 p-5 sm:p-6 lg:p-8 rotate-[1deg]">
         <div class="flex items-start justify-between mb-5">
           <div>
             <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 04</div>
-            <h3 class="font-hand text-5xl text-red mt-1">Clásica</h3>
+            <h3 class="font-hand text-3xl sm:text-4xl lg:text-5xl text-red mt-1">Clásica</h3>
             <div class="font-type text-xs text-muted mt-1">85 g · chispas de chocolate negro</div>
           </div>
-          <span class="font-display text-4xl text-ink">$2.50</span>
+          <span class="font-display text-2xl sm:text-3xl lg:text-4xl text-ink">$2.50</span>
         </div>
         <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
           <img src="../assets/imagenes/postres/p001_img05_761x760.jpeg" class="w-full h-full object-cover" alt="Clásica" />
           <div class="absolute top-3 right-3 bg-coffee text-cream font-hand text-lg px-3 py-1 rounded-full -rotate-6">¡eterna!</div>
         </div>
-        <div class="font-hand text-xl text-ink-2 leading-tight">
+        <div class="font-hand text-base lg:text-xl text-ink-2 leading-tight">
           "Mantequillosa, dorada, con chispas de chocolate negro. Un clásico reconfortante que nunca falla."
         </div>
         <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
@@ -568,7 +592,7 @@ tailwind.config = {
         </div>
       </article>
       <!-- Cajas card -->
-      <article class="bg-ink text-cream w-[420px] shrink-0 p-10 rounded-lg shadow-2xl">
+      <article class="bg-ink text-cream w-[300px] sm:w-[360px] lg:w-[420px] shrink-0 p-6 sm:p-8 lg:p-10 rounded-lg shadow-2xl">
         <div class="font-type text-xs uppercase tracking-wider text-gold">— Empaques —</div>
         <h3 class="font-hand text-5xl text-cream mt-2">¿Cuántas te llevas?</h3>
         <div class="mt-8 space-y-5">
@@ -603,26 +627,26 @@ tailwind.config = {
 </section>
 
 <!-- CAPÍTULO 3: POSTRES - FEATURED -->
-<section id="postres" class="paper-bg py-32 relative overflow-hidden">
+<section id="postres" class="paper-bg py-16 lg:py-32 relative overflow-hidden">
   <div class="stain" style="top:5%; right:-50px;"></div>
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="text-center mb-16">
       <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo III —</div>
-      <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+      <h2 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink leading-tight">
         Postres para <span class="font-hand text-red italic">celebrar</span>.
       </h2>
     </div>
-    <div class="grid lg:grid-cols-2 gap-14">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
       <article class="card-3d group" data-card-3d>
         <div class="polaroid w-full" style="padding-bottom:50px;">
           <span class="tape"></span>
-          <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake NY" class="h-[420px] object-cover" />
+          <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake NY" class="h-[300px] sm:h-[360px] lg:h-[420px] object-cover" />
           <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink-2">cheesecake n.y.</div>
         </div>
         <div class="mt-8">
           <div class="flex items-baseline justify-between gap-4">
-            <h3 class="font-display text-3xl text-ink">Cheesecake estilo Nueva York</h3>
-            <span class="font-display text-4xl text-red">$25</span>
+            <h3 class="font-display text-2xl lg:text-3xl text-ink">Cheesecake estilo Nueva York</h3>
+            <span class="font-display text-3xl lg:text-4xl text-red">$25</span>
           </div>
           <p class="mt-3 font-serif text-lg text-ink-2 leading-relaxed">
             Horneado al estilo neoyorquino: textura compacta y sedosa, base de galleta mantequillosa. Coronado con frutos rojos para un contraste perfecto.
@@ -633,13 +657,13 @@ tailwind.config = {
       <article class="card-3d group" data-card-3d>
         <div class="polaroid w-full" style="padding-bottom:50px;">
           <span class="tape" style="background:rgba(185,34,20,0.55);"></span>
-          <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada chocolate" class="h-[420px] object-cover" />
+          <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada chocolate" class="h-[300px] sm:h-[360px] lg:h-[420px] object-cover" />
           <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-red">mojada de choco</div>
         </div>
         <div class="mt-8">
           <div class="flex items-baseline justify-between gap-4">
-            <h3 class="font-display text-3xl text-ink">Mojada de Chocolate</h3>
-            <span class="font-display text-4xl text-red">$25</span>
+            <h3 class="font-display text-2xl lg:text-3xl text-ink">Mojada de Chocolate</h3>
+            <span class="font-display text-3xl lg:text-4xl text-red">$25</span>
           </div>
           <p class="mt-3 font-serif text-lg text-ink-2 leading-relaxed">
             Bizcocho de cacao extra húmedo con baño brillante y centro de fudge de chocolate 65%. Decorado con frutos rojos que equilibran la intensidad.
@@ -652,7 +676,7 @@ tailwind.config = {
 </section>
 
 <!-- QUOTE TYPEWRITER -->
-<section class="paper-deep py-28 relative overflow-hidden">
+<section class="paper-deep py-16 lg:py-28 relative overflow-hidden">
   <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
     <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-6">— Anotación al margen —</div>
     <blockquote class="font-display text-3xl lg:text-5xl leading-snug text-ink">
@@ -663,16 +687,16 @@ tailwind.config = {
 </section>
 
 <!-- CAPÍTULO 4: MARCAS COMO SELLOS POSTALES -->
-<section id="marcas" class="paper-bg py-28 relative">
+<section id="marcas" class="paper-bg py-16 lg:py-28 relative">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="text-center mb-16">
       <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo IV —</div>
-      <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+      <h2 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink leading-tight">
         Las cinco <span class="font-hand text-red italic">casas</span>.
       </h2>
       <p class="mt-5 font-serif text-lg text-ink-2 max-w-2xl mx-auto">Cada marca es una rama de la misma cocina. Coleccionables como sellos postales.</p>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
       <div class="post-stamp rotate-[-2deg] hover:rotate-0 transition-transform">
         <div class="text-center py-2">
           <div class="font-type text-[10px] uppercase tracking-wider text-muted">Ecuador · 2025</div>
@@ -718,46 +742,46 @@ tailwind.config = {
 </section>
 
 <!-- DISTRIBUIDORES -->
-<section class="paper-deep py-20 relative">
+<section class="paper-deep py-12 lg:py-20 relative">
   <div class="max-w-6xl mx-auto px-6 lg:px-10 text-center">
     <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">Donde encontrarnos</div>
     <h3 class="font-display text-3xl lg:text-4xl text-ink mb-12">Distribuidores de confianza</h3>
-    <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 items-center font-display text-2xl text-muted">
+    <div class="flex flex-wrap justify-center gap-x-6 sm:gap-x-12 gap-y-4 sm:gap-y-6 items-center font-display text-xl sm:text-2xl text-muted">
       <span class="hover:text-red transition">Marriott</span>
-      <span class="opacity-30">·</span>
+      <span class="opacity-30 hidden sm:inline">·</span>
       <span class="hover:text-red transition">El Merkato</span>
-      <span class="opacity-30">·</span>
+      <span class="opacity-30 hidden sm:inline">·</span>
       <span class="hover:text-red transition">Zolo</span>
-      <span class="opacity-30">·</span>
+      <span class="opacity-30 hidden sm:inline">·</span>
       <span class="hover:text-red transition">D'ley</span>
-      <span class="opacity-30">·</span>
+      <span class="opacity-30 hidden sm:inline">·</span>
       <span class="hover:text-red transition">Familia</span>
-      <span class="opacity-30">·</span>
+      <span class="opacity-30 hidden sm:inline">·</span>
       <span class="hover:text-red transition">Corpus</span>
     </div>
   </div>
 </section>
 
 <!-- CAPÍTULO 5: CTA WAX SEAL LETTER -->
-<section id="contacto" class="paper-bg py-32 relative overflow-hidden">
+<section id="contacto" class="paper-bg py-16 lg:py-32 relative overflow-hidden">
   <div class="stain" style="top:10%; left:50%; transform:translateX(-50%);"></div>
   <div class="max-w-3xl mx-auto px-6 lg:px-10 relative">
-    <div class="bg-cream border border-ink/15 rounded-sm p-10 lg:p-16 shadow-2xl relative">
-      <div class="absolute -top-8 -right-8 wax-seal" style="width:110px; height:110px; font-size:20px;">
+    <div class="bg-cream border border-ink/15 rounded-sm p-7 sm:p-10 lg:p-16 shadow-2xl relative">
+      <div class="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 wax-seal" style="width:80px; height:80px; font-size:16px;">
         A&amp;L
       </div>
       <div class="font-type text-xs uppercase tracking-[.3em] text-muted">— Carta para ti —</div>
-      <h2 class="font-display text-5xl lg:text-7xl text-ink mt-4 leading-[1.05]">
+      <h2 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink mt-4 leading-[1.05]">
         Tu mesa, <span class="font-hand text-red italic">nuestra tradición</span>.
       </h2>
       <p class="mt-6 font-serif text-lg text-ink-2 leading-relaxed">
         Escribe lo que necesitas para tu reunión, regalo o evento. Te responderemos con cariño — y con tiempo, como manda la abuela.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
-        <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-ink text-cream font-serif italic text-lg px-8 py-4 rounded-full hover:bg-red transition">
+        <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-ink text-cream font-serif italic text-base lg:text-lg px-6 lg:px-8 py-3.5 lg:py-4 rounded-full hover:bg-red transition">
           WhatsApp · 099 744 8167
         </a>
-        <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 border-2 border-ink text-ink font-serif italic text-lg px-8 py-4 rounded-full hover:bg-ink hover:text-cream transition">
+        <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 border-2 border-ink text-ink font-serif italic text-base lg:text-lg px-6 lg:px-8 py-3.5 lg:py-4 rounded-full hover:bg-ink hover:text-cream transition">
           Escríbenos por email
         </a>
       </div>
