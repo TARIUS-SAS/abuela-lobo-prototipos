@@ -191,7 +191,7 @@ tailwind.config = {
 
 <!-- HERO EDITORIAL -->
 <section class="bg-paper relative overflow-hidden grain">
-  <div class="max-w-[88rem] mx-auto px-8 lg:px-16 pt-16 lg:pt-24 pb-20 lg:pb-32">
+  <div class="max-w-[88rem] mx-auto px-8 lg:px-16 pt-10 lg:pt-24 pb-14 lg:pb-32">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
       <div class="lg:col-span-7">
         <div class="flex items-center gap-4 text-xs tracking-[.3em] uppercase text-muted" data-hero-tag>
@@ -230,7 +230,7 @@ tailwind.config = {
 </section>
 
 <!-- EDITORIAL QUOTE -->
-<section id="editorial" class="bg-paper-2 py-24 lg:py-32 relative">
+<section id="editorial" class="bg-paper-2 py-16 lg:py-32 relative">
   <div class="max-w-6xl mx-auto px-8 lg:px-16 text-center">
     <div class="text-xs tracking-[.3em] uppercase text-muted mb-6">— Editorial —</div>
     <p class="serif italic text-[clamp(1.5rem,3vw,2.75rem)] leading-[1.3] text-ink max-w-4xl mx-auto" data-fade-quote>
@@ -248,15 +248,15 @@ tailwind.config = {
     <!-- Header de capítulo -->
     <div class="text-center mb-16 lg:mb-20">
       <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Capítulo Nº 01 —</div>
-      <h2 class="serif display-line text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
+      <h2 class="serif display-line text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
         Las piezas <span class="italic">destacadas</span>.
       </h2>
     </div>
 
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-20 items-start">
-      <!-- LEFT: sticky image stack (cross-fade entre 3) -->
-      <div class="lg:col-span-7 lg:sticky lg:top-28 self-start">
-        <div class="relative h-[340px] md:h-[500px] lg:h-[640px]">
+      <!-- LEFT: sticky image stack (cross-fade entre 3) - solo desktop -->
+      <div class="hidden lg:block lg:col-span-7 lg:sticky lg:top-28 self-start">
+        <div class="relative h-[640px]">
           <div data-story-img-b="1" class="absolute inset-0">
             <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada de chocolate" class="w-full h-full object-cover" />
           </div>
@@ -266,62 +266,86 @@ tailwind.config = {
           <div data-story-img-b="3" class="absolute inset-0" style="opacity:0">
             <img src="../assets/imagenes/postres/p001_img01_1850x1236.png" alt="Galletas colección" class="w-full h-full object-cover" />
           </div>
-          <!-- Caption fija sobre la imagen -->
-          <div class="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 lg:right-6 bg-paper/95 backdrop-blur px-4 lg:px-5 py-2.5 lg:py-3 flex items-center justify-between border-l-2 border-accent">
-            <div class="text-[10px] lg:text-xs tracking-[.3em] uppercase text-muted">Pieza destacada</div>
-            <div class="serif italic text-base lg:text-lg text-ink" data-caption-b>Mojada de chocolate</div>
+          <div class="absolute bottom-6 left-6 right-6 bg-paper/95 backdrop-blur px-5 py-3 flex items-center justify-between border-l-2 border-accent">
+            <div class="text-xs tracking-[.3em] uppercase text-muted">Pieza destacada</div>
+            <div class="serif italic text-lg text-ink" data-caption-b>Mojada de chocolate</div>
           </div>
-          <!-- Indicador de pieza (1/3, 2/3, 3/3) -->
-          <div class="absolute top-4 right-4 lg:top-6 lg:right-6 bg-ink text-paper px-3 py-1.5 num text-xs tracking-wider">
+          <div class="absolute top-6 right-6 bg-ink text-paper px-3 py-1.5 num text-xs tracking-wider">
             <span data-counter-b>01</span> / 03
           </div>
         </div>
       </div>
 
-      <!-- RIGHT: scroll beats (texto que cambia la imagen sticky) -->
-      <div class="lg:col-span-5 space-y-32 lg:space-y-48 py-10">
+      <!-- BEATS - cada uno con su imagen inline en mobile (lg:col-span-5 en desktop) -->
+      <div class="lg:col-span-5 space-y-20 lg:space-y-48">
+        <!-- BEAT 1 -->
         <div class="beat is-active" data-story-beat-b="1" data-caption="Mojada de chocolate" data-counter="01">
-          <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 01 —</div>
-          <h3 class="serif display-line text-4xl md:text-5xl lg:text-6xl leading-[1] text-ink">
+          <!-- Imagen mobile-only -->
+          <div class="lg:hidden relative mb-8 overflow-hidden">
+            <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada de chocolate" class="w-full h-[280px] sm:h-[360px] object-cover" />
+            <div class="absolute top-3 right-3 bg-ink text-paper px-2.5 py-1 num text-[10px] tracking-wider">01 / 03</div>
+            <div class="absolute bottom-3 left-3 right-3 bg-paper/95 backdrop-blur px-3 py-2 border-l-2 border-accent">
+              <div class="text-[9px] tracking-[.3em] uppercase text-muted">Pieza destacada</div>
+              <div class="serif italic text-sm text-ink">Mojada de chocolate</div>
+            </div>
+          </div>
+          <div class="text-[11px] lg:text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 01 —</div>
+          <h3 class="serif display-line text-4xl sm:text-5xl lg:text-6xl leading-[1] text-ink">
             Mojada de <span class="italic">chocolate.</span>
           </h3>
-          <div class="hairline w-24 mt-8"></div>
-          <p class="mt-8 text-base lg:text-lg leading-[1.75] text-ink-2 font-light">
+          <div class="hairline w-24 mt-6 lg:mt-8"></div>
+          <p class="mt-6 lg:mt-8 text-base lg:text-lg leading-[1.7] text-ink-2 font-light">
             Bizcocho de cacao extra húmedo con baño brillante y centro de fudge de chocolate al 65%. Coronado con frutos rojos que equilibran la intensidad.
           </p>
-          <dl class="mt-8 grid grid-cols-2 gap-y-3 text-sm">
-            <dt class="text-muted tracking-[.16em] uppercase text-xs">Porciones</dt><dd class="serif text-lg">8 a 12</dd>
-            <dt class="text-muted tracking-[.16em] uppercase text-xs">Cacao</dt><dd class="serif text-lg">65%</dd>
-            <dt class="text-muted tracking-[.16em] uppercase text-xs">Precio</dt><dd class="serif text-lg text-accent num">USD 25.00</dd>
+          <dl class="mt-6 lg:mt-8 grid grid-cols-3 gap-x-4 gap-y-2 text-sm">
+            <dt class="text-muted tracking-[.16em] uppercase text-[10px] lg:text-xs">Porciones</dt><dt class="text-muted tracking-[.16em] uppercase text-[10px] lg:text-xs">Cacao</dt><dt class="text-muted tracking-[.16em] uppercase text-[10px] lg:text-xs">Precio</dt>
+            <dd class="serif text-base lg:text-lg">8 a 12</dd><dd class="serif text-base lg:text-lg">65%</dd><dd class="serif text-base lg:text-lg text-accent num">$25</dd>
           </dl>
         </div>
 
+        <!-- BEAT 2 -->
         <div class="beat" data-story-beat-b="2" data-caption="Cheesecake N.Y." data-counter="02">
-          <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 02 —</div>
-          <h3 class="serif display-line text-4xl md:text-5xl lg:text-6xl leading-[1] text-ink">
+          <div class="lg:hidden relative mb-8 overflow-hidden">
+            <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake N.Y." class="w-full h-[280px] sm:h-[360px] object-cover" />
+            <div class="absolute top-3 right-3 bg-ink text-paper px-2.5 py-1 num text-[10px] tracking-wider">02 / 03</div>
+            <div class="absolute bottom-3 left-3 right-3 bg-paper/95 backdrop-blur px-3 py-2 border-l-2 border-accent">
+              <div class="text-[9px] tracking-[.3em] uppercase text-muted">Pieza destacada</div>
+              <div class="serif italic text-sm text-ink">Cheesecake N.Y.</div>
+            </div>
+          </div>
+          <div class="text-[11px] lg:text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 02 —</div>
+          <h3 class="serif display-line text-4xl sm:text-5xl lg:text-6xl leading-[1] text-ink">
             Cheesecake <span class="italic">N.Y.</span>
           </h3>
-          <div class="hairline w-24 mt-8"></div>
-          <p class="mt-8 text-base lg:text-lg leading-[1.75] text-ink-2 font-light">
+          <div class="hairline w-24 mt-6 lg:mt-8"></div>
+          <p class="mt-6 lg:mt-8 text-base lg:text-lg leading-[1.7] text-ink-2 font-light">
             Horneado al estilo neoyorquino: textura compacta y sedosa, base de galleta mantequillosa. Coronado con frutos rojos para un contraste perfecto.
           </p>
-          <dl class="mt-8 grid grid-cols-2 gap-y-3 text-sm">
-            <dt class="text-muted tracking-[.16em] uppercase text-xs">Porciones</dt><dd class="serif text-lg">8 a 12</dd>
-            <dt class="text-muted tracking-[.16em] uppercase text-xs">Reposo</dt><dd class="serif text-lg">12 h</dd>
-            <dt class="text-muted tracking-[.16em] uppercase text-xs">Precio</dt><dd class="serif text-lg text-accent num">USD 25.00</dd>
+          <dl class="mt-6 lg:mt-8 grid grid-cols-3 gap-x-4 gap-y-2 text-sm">
+            <dt class="text-muted tracking-[.16em] uppercase text-[10px] lg:text-xs">Porciones</dt><dt class="text-muted tracking-[.16em] uppercase text-[10px] lg:text-xs">Reposo</dt><dt class="text-muted tracking-[.16em] uppercase text-[10px] lg:text-xs">Precio</dt>
+            <dd class="serif text-base lg:text-lg">8 a 12</dd><dd class="serif text-base lg:text-lg">12 h</dd><dd class="serif text-base lg:text-lg text-accent num">$25</dd>
           </dl>
         </div>
 
+        <!-- BEAT 3 -->
         <div class="beat" data-story-beat-b="3" data-caption="La colección de galletas" data-counter="03">
-          <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 03 —</div>
-          <h3 class="serif display-line text-4xl md:text-5xl lg:text-6xl leading-[1] text-ink">
+          <div class="lg:hidden relative mb-8 overflow-hidden">
+            <img src="../assets/imagenes/postres/p001_img01_1850x1236.png" alt="Colección de galletas" class="w-full h-[280px] sm:h-[360px] object-cover" />
+            <div class="absolute top-3 right-3 bg-ink text-paper px-2.5 py-1 num text-[10px] tracking-wider">03 / 03</div>
+            <div class="absolute bottom-3 left-3 right-3 bg-paper/95 backdrop-blur px-3 py-2 border-l-2 border-accent">
+              <div class="text-[9px] tracking-[.3em] uppercase text-muted">Pieza destacada</div>
+              <div class="serif italic text-sm text-ink">La colección de galletas</div>
+            </div>
+          </div>
+          <div class="text-[11px] lg:text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 03 —</div>
+          <h3 class="serif display-line text-4xl sm:text-5xl lg:text-6xl leading-[1] text-ink">
             La <span class="italic">colección</span> de galletas.
           </h3>
-          <div class="hairline w-24 mt-8"></div>
-          <p class="mt-8 text-base lg:text-lg leading-[1.75] text-ink-2 font-light">
+          <div class="hairline w-24 mt-6 lg:mt-8"></div>
+          <p class="mt-6 lg:mt-8 text-base lg:text-lg leading-[1.7] text-ink-2 font-light">
             Cuatro sabores ensayados generación tras generación: Clásica, Red Velvet, Zanahoria y Cookie Monster. Cada pieza es de 85 g — para ti, o para compartir en caja.
           </p>
-          <a href="#coleccion" class="mt-10 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-sm tracking-[.18em] uppercase hover:border-accent hover:text-accent transition magnetic">
+          <a href="#coleccion" class="mt-8 lg:mt-10 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-xs lg:text-sm tracking-[.18em] uppercase hover:border-accent hover:text-accent transition magnetic">
             Ver la colección completa
             <svg width="18" height="12" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h20M15 1l6 6-6 6"/></svg>
           </a>
@@ -421,9 +445,9 @@ tailwind.config = {
 </section>
 
 <!-- LAS CASAS - SUB-BRANDS -->
-<section id="casas" class="bg-ink text-paper py-24 lg:py-32 relative overflow-hidden grain">
+<section id="casas" class="bg-ink text-paper py-16 lg:py-32 relative overflow-hidden grain">
   <div class="max-w-[88rem] mx-auto px-8 lg:px-16">
-    <div class="grid lg:grid-cols-12 gap-12 mb-20">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-12 lg:mb-20">
       <div class="lg:col-span-5">
         <div class="text-xs tracking-[.3em] uppercase text-gold">— Capítulo N° 03 —</div>
         <h2 class="serif display-line text-5xl lg:text-6xl mt-5">Las cinco<br/><span class="italic">casas.</span></h2>
@@ -432,34 +456,34 @@ tailwind.config = {
         Cinco especialidades, una sola filosofía. Cada casa es una conversación distinta con la cocina: pan, carne, conserva, postre, agua. Pero todas hablan el mismo idioma — el del cuidado.
       </p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-px bg-paper/15">
-      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-px bg-paper/15">
+      <div class="bg-ink p-5 sm:p-6 lg:p-8 hover:bg-ink/70 transition group editorial-card" data-house>
         <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 01</div>
-        <div class="serif italic text-4xl mt-2">Grön</div>
+        <div class="serif italic text-2xl sm:text-3xl lg:text-4xl mt-2">Grön</div>
         <div class="hairline bg-paper mt-6 w-12"></div>
         <p class="text-sm text-paper/70 mt-6 leading-relaxed">Panadería — el arte del grano en tu paladar.</p>
       </div>
-      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+      <div class="bg-ink p-5 sm:p-6 lg:p-8 hover:bg-ink/70 transition group editorial-card" data-house>
         <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 02</div>
-        <div class="serif italic text-4xl mt-2">Kúa</div>
+        <div class="serif italic text-2xl sm:text-3xl lg:text-4xl mt-2">Kúa</div>
         <div class="hairline bg-paper mt-6 w-12"></div>
         <p class="text-sm text-paper/70 mt-6 leading-relaxed">Cárnicos de pollo, cortes cuidados y marinados.</p>
       </div>
-      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+      <div class="bg-ink p-5 sm:p-6 lg:p-8 hover:bg-ink/70 transition group editorial-card" data-house>
         <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 03</div>
-        <div class="serif italic text-4xl mt-2">Morifruti</div>
+        <div class="serif italic text-2xl sm:text-3xl lg:text-4xl mt-2">Morifruti</div>
         <div class="hairline bg-paper mt-6 w-12"></div>
         <p class="text-sm text-paper/70 mt-6 leading-relaxed">Mermeladas naturales con frutos reales.</p>
       </div>
-      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+      <div class="bg-ink p-5 sm:p-6 lg:p-8 hover:bg-ink/70 transition group editorial-card" data-house>
         <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 04</div>
-        <div class="serif italic text-4xl mt-2">Piñaji</div>
+        <div class="serif italic text-2xl sm:text-3xl lg:text-4xl mt-2">Piñaji</div>
         <div class="hairline bg-paper mt-6 w-12"></div>
         <p class="text-sm text-paper/70 mt-6 leading-relaxed">Encurtidos artesanales, sabor auténtico.</p>
       </div>
-      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+      <div class="bg-ink p-5 sm:p-6 lg:p-8 hover:bg-ink/70 transition group editorial-card" data-house>
         <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 05</div>
-        <div class="serif italic text-4xl mt-2">Del Bosque</div>
+        <div class="serif italic text-2xl sm:text-3xl lg:text-4xl mt-2">Del Bosque</div>
         <div class="hairline bg-paper mt-6 w-12"></div>
         <p class="text-sm text-paper/70 mt-6 leading-relaxed">Agua embotellada de la naturaleza.</p>
       </div>
@@ -468,7 +492,7 @@ tailwind.config = {
 </section>
 
 <!-- MANIFIESTO -->
-<section id="manifiesto" class="bg-paper py-32 lg:py-40 relative overflow-hidden">
+<section id="manifiesto" class="bg-paper py-20 lg:py-40 relative overflow-hidden">
   <div class="max-w-5xl mx-auto px-8 lg:px-16">
     <div class="text-xs tracking-[.3em] uppercase text-muted text-center mb-12">— El manifiesto —</div>
     <p class="quote-mark serif text-[clamp(1.75rem,3.5vw,3.25rem)] leading-[1.3] text-ink" id="manifesto-quote">
@@ -500,19 +524,19 @@ tailwind.config = {
 </section>
 
 <!-- CTA -->
-<section id="contacto" class="bg-paper-2 py-24 lg:py-32">
-  <div class="max-w-4xl mx-auto px-8 text-center">
-    <h2 class="serif display-line text-5xl lg:text-7xl text-ink leading-[1]" id="cta-title">
+<section id="contacto" class="bg-paper-2 py-16 lg:py-32">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <h2 class="serif display-line text-4xl sm:text-5xl lg:text-7xl text-ink leading-[1]" id="cta-title">
       Reserve su <span class="italic text-accent">pieza.</span>
     </h2>
     <p class="mt-8 text-lg text-ink-2 max-w-2xl mx-auto leading-[1.7] font-light">
       Hacemos cada producto con tiempo. Para pedidos personalizados, eventos o catálogo completo, contáctenos directamente.
     </p>
-    <div class="mt-12 flex flex-wrap justify-center gap-6">
-      <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-ink text-paper px-10 py-5 tracking-[.18em] uppercase text-sm hover:bg-accent transition">
+    <div class="mt-8 lg:mt-12 flex flex-wrap justify-center gap-3 lg:gap-6">
+      <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-ink text-paper px-6 py-3.5 lg:px-10 lg:py-5 tracking-[.18em] uppercase text-sm hover:bg-accent transition">
         WhatsApp · 099 744 8167
       </a>
-      <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 border border-ink px-10 py-5 tracking-[.18em] uppercase text-sm hover:bg-ink hover:text-paper transition">
+      <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 border border-ink px-6 py-3.5 lg:px-10 lg:py-5 tracking-[.18em] uppercase text-sm hover:bg-ink hover:text-paper transition">
         contacto@comdelbosque.com
       </a>
     </div>
