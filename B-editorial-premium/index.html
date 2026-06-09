@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>D' La Abuela y el Lobo — Una colección de sabores honestos</title>
+<meta name="description" content="Una colección curada de productos artesanales. Recetas familiares, ingredientes reales, trabajo honesto." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper:      '#F8F4ED',
+        'paper-2':  '#ECE4D3',
+        'paper-3':  '#E2D7BE',
+        ink:        '#14110D',
+        'ink-2':    '#3C362E',
+        muted:      '#7A7368',
+        accent:     '#B92214',
+        'accent-2': '#8A1A0F',
+        gold:       '#A4823A',
+      },
+      fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans:  ['"Inter Tight"', 'system-ui', 'sans-serif'],
+      },
+    },
+  },
+};
+</script>
+<style>
+  html, body { margin:0; padding:0; }
+  html { scroll-behavior: auto; }
+  body {
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    background: #F8F4ED;
+    color: #14110D;
+    overflow-x: hidden;
+  }
+  .serif { font-family: 'Playfair Display', Georgia, serif; }
+  .display-line { font-feature-settings: "kern", "liga", "dlig"; letter-spacing: -0.02em; }
+  .grain::before {
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .hairline { height: 1px; background: #14110D; opacity: .12; }
+  .num { font-variant-numeric: tabular-nums; }
+  .quote-mark::before { content:"❝"; font-family:'Playfair Display',serif; font-size:6rem; line-height:0; vertical-align:-0.4em; color:#B92214; margin-right:.15em; }
+  /* Lenis */
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  /* Cursor — subtle ink dot */
+  #cursor {
+    position: fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
+    background:#14110D; pointer-events:none; z-index:1000; opacity:.6;
+    transition: opacity .25s, width .25s, height .25s, background .3s;
+    transform: translate(-50%,-50%);
+  }
+  #cursor.expanded { width:48px; height:48px; opacity:.15; background:#B92214; }
+  @media (max-width: 1024px) { #cursor { display:none; } }
+  /* Progress */
+  #progress {
+    position: fixed; top:0; left:0; height:1px; width:0%;
+    background: #A4823A; z-index:100; transition: width .1s linear;
+  }
+  /* Magnetic */
+  .magnetic { display:inline-block; will-change: transform; }
+  /* Clip-path image reveal */
+  .clip-reveal { clip-path: inset(0 100% 0 0); }
+  /* Split text */
+  .split-line { overflow: hidden; }
+  .split-line .word { display: inline-block; transform: translateY(110%); opacity: 0; }
+  /* Section transition */
+  .section-divider { position:relative; }
+  /* Beat */
+  .beat { opacity: .15; transition: opacity .5s ease; }
+  .beat.is-active { opacity: 1; }
+  /* Horizontal cards subtle */
+  .h-card { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  /* Mask wipe for big images */
+  .mask-wipe {
+    -webkit-mask-image: linear-gradient(90deg, #000, #000);
+    mask-image: linear-gradient(90deg, #000, #000);
+    -webkit-mask-size: 0% 100%;
+    mask-size: 0% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+  /* Subtle hover for cards */
+  .editorial-card { transition: opacity .3s; }
+  .editorial-card img { transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  .editorial-card:hover img { transform: scale(1.04); }
+  ::selection { background:#14110D; color:#F8F4ED; }
+  /* Touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .magnetic { transform: none !important; }
+    #cursor { display: none !important; }
+  }
+  /* Mobile menu */
+  #mobile-menu {
+    position: fixed; inset: 0; z-index: 60; background: #F8F4ED;
+    transform: translateX(100%); transition: transform .45s cubic-bezier(.83, 0, .17, 1);
+    overflow-y: auto;
+  }
+  #mobile-menu.open { transform: translateX(0); }
+  /* Mobile font scaling */
+  @media (max-width: 768px) {
+    .display-line { letter-spacing: -0.01em; }
+  }
+</style>
+</head>
+<body class="antialiased">
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="bg-ink text-paper text-xs tracking-[.2em] uppercase py-2.5 text-center">
+  Edición 2025 · Catálogo de temporada disponible
+</div>
+
+<!-- NAVBAR -->
+<header class="bg-paper border-b border-ink/10 sticky top-0 z-40 backdrop-blur">
+  <div class="max-w-[88rem] mx-auto px-5 lg:px-16 h-20 lg:h-24 flex items-center justify-between">
+    <a href="#" class="flex flex-col leading-tight">
+      <span class="serif italic text-2xl">D'</span>
+      <span class="text-[10px] lg:text-xs tracking-[.32em] uppercase -mt-1">Abuela &amp; Lobo</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-12 text-[13px] tracking-[.14em] uppercase font-medium">
+      <a class="hover:text-accent transition" href="#coleccion">Colección</a>
+      <a class="hover:text-accent transition" href="#editorial">Editorial</a>
+      <a class="hover:text-accent transition" href="#casas">Las casas</a>
+      <a class="hover:text-accent transition" href="#manifiesto">Manifiesto</a>
+      <a class="hover:text-accent transition" href="#contacto">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-3 lg:gap-6 text-sm">
+      <a href="#" class="hidden md:inline hover:text-accent transition">Buscar</a>
+      <a href="#contacto" class="magnetic hidden sm:inline serif italic underline decoration-accent underline-offset-4 hover:text-accent transition">Hacer pedido</a>
+      <button id="menu-toggle" class="lg:hidden w-11 h-11 grid place-items-center border border-ink/30 rounded-full" aria-label="Abrir menú">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="lg:hidden">
+  <div class="flex items-center justify-between p-5 border-b border-ink/10">
+    <div class="flex flex-col leading-tight">
+      <span class="serif italic text-2xl">D'</span>
+      <span class="text-[10px] tracking-[.32em] uppercase -mt-1">Abuela &amp; Lobo</span>
+    </div>
+    <button id="menu-close" class="w-11 h-11 grid place-items-center border border-ink/30 rounded-full" aria-label="Cerrar menú">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav class="px-8 py-12 flex flex-col">
+    <a class="serif text-4xl py-4 border-b border-ink/10 hover:text-accent transition" href="#coleccion" data-menu-link>
+      <span class="text-[10px] tracking-[.3em] uppercase text-muted block mb-1">N° 01</span>
+      Colección
+    </a>
+    <a class="serif text-4xl py-4 border-b border-ink/10 hover:text-accent transition" href="#editorial" data-menu-link>
+      <span class="text-[10px] tracking-[.3em] uppercase text-muted block mb-1">N° 02</span>
+      Editorial
+    </a>
+    <a class="serif text-4xl py-4 border-b border-ink/10 hover:text-accent transition" href="#casas" data-menu-link>
+      <span class="text-[10px] tracking-[.3em] uppercase text-muted block mb-1">N° 03</span>
+      Las casas
+    </a>
+    <a class="serif text-4xl py-4 border-b border-ink/10 hover:text-accent transition" href="#manifiesto" data-menu-link>
+      <span class="text-[10px] tracking-[.3em] uppercase text-muted block mb-1">N° 04</span>
+      Manifiesto
+    </a>
+    <a class="serif text-4xl py-4 border-b border-ink/10 hover:text-accent transition" href="#contacto" data-menu-link>
+      <span class="text-[10px] tracking-[.3em] uppercase text-muted block mb-1">N° 05</span>
+      Contacto
+    </a>
+    <div class="mt-10 text-sm tracking-[.14em] uppercase text-muted">
+      099 744 8167<br/>
+      <a href="mailto:contacto@comdelbosque.com" class="serif italic normal-case text-base text-ink mt-1 inline-block">contacto@comdelbosque.com</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO EDITORIAL -->
+<section class="bg-paper relative overflow-hidden grain">
+  <div class="max-w-[88rem] mx-auto px-8 lg:px-16 pt-16 lg:pt-24 pb-20 lg:pb-32">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-4 text-xs tracking-[.3em] uppercase text-muted" data-hero-tag>
+          <span class="w-12 h-px bg-accent"></span>
+          <span>Edición Nº 01 · Volumen 2025</span>
+        </div>
+        <h1 class="serif display-line font-medium text-[clamp(3rem,7.5vw,7.5rem)] leading-[.95] mt-8 text-ink">
+          <div class="split-line"><span class="word">El</span> <span class="word">arte</span> <span class="word">de</span> <span class="word">la</span> <span class="word italic text-accent">cocina</span></div>
+          <div class="split-line"><span class="word">hecha</span> <span class="word">con</span> <span class="word italic">tiempo.</span></div>
+        </h1>
+        <div class="hairline mt-12 w-32" data-reveal></div>
+        <p class="mt-8 text-lg leading-[1.7] max-w-xl text-ink-2 font-light" data-reveal>
+          Una colección curada de productos artesanales que rescatan los sabores caseros con identidad propia. Recetas familiares, ingredientes reales, trabajo honesto — sin tendencias, solo memoria del paladar.
+        </p>
+        <div class="mt-12 flex items-center gap-8" data-reveal>
+          <a href="#coleccion" class="magnetic group inline-flex items-center gap-3 serif italic text-xl text-ink hover:text-accent transition">
+            Explorar la colección
+            <svg class="transition group-hover:translate-x-1" width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h20M15 1l6 6-6 6"/></svg>
+          </a>
+          <a href="#manifiesto" class="text-sm tracking-[.16em] uppercase border-b border-ink/30 pb-1 hover:border-accent hover:text-accent transition">El manifiesto</a>
+        </div>
+      </div>
+      <div class="lg:col-span-5 relative">
+        <div class="relative overflow-hidden">
+          <img id="hero-img" src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake"
+               class="clip-reveal w-full h-[460px] lg:h-[600px] object-cover" />
+          <div class="absolute -bottom-8 -left-10 bg-paper p-6 max-w-[260px] hidden lg:block shadow-xl border-l-2 border-accent" data-card-float>
+            <div class="text-xs tracking-[.3em] uppercase text-muted">N° 04 · Postres</div>
+            <div class="serif italic text-2xl mt-2 leading-tight">Cheesecake al estilo Nueva York</div>
+            <div class="num text-sm text-ink-2 mt-3">USD 25.00 · 8–12 porciones</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL QUOTE -->
+<section id="editorial" class="bg-paper-2 py-24 lg:py-32 relative">
+  <div class="max-w-6xl mx-auto px-8 lg:px-16 text-center">
+    <div class="text-xs tracking-[.3em] uppercase text-muted mb-6">— Editorial —</div>
+    <p class="serif italic text-[clamp(1.5rem,3vw,2.75rem)] leading-[1.3] text-ink max-w-4xl mx-auto" data-fade-quote>
+      "No seguimos tendencias.<br/>
+      Seguimos el instinto y la memoria del paladar."
+    </p>
+    <div class="mt-8 text-xs tracking-[.3em] uppercase text-muted" data-fade-quote>Filosofía de la casa</div>
+  </div>
+</section>
+
+<!-- STICKY STORYTELLING - PIECE FEATURED -->
+<section id="coleccion-featured" class="bg-paper relative overflow-hidden">
+  <div id="story-pin-b" class="relative">
+    <div class="max-w-[88rem] mx-auto px-8 lg:px-16 py-20 grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+      <!-- LEFT: sticky image -->
+      <div class="lg:col-span-7 lg:sticky lg:top-32 self-start">
+        <div class="relative h-[420px] md:h-[520px] lg:h-[620px]">
+          <div data-story-img-b="1" class="absolute inset-0 transition-opacity duration-700">
+            <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada de chocolate" class="w-full h-full object-cover" />
+          </div>
+          <div data-story-img-b="2" class="absolute inset-0 opacity-0 transition-opacity duration-700">
+            <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake" class="w-full h-full object-cover" />
+          </div>
+          <div data-story-img-b="3" class="absolute inset-0 opacity-0 transition-opacity duration-700">
+            <img src="../assets/imagenes/postres/p001_img01_1850x1236.png" alt="Galletas colección" class="w-full h-full object-cover" />
+          </div>
+          <!-- caption -->
+          <div class="absolute bottom-6 left-6 right-6 bg-paper/95 backdrop-blur px-5 py-3 flex items-center justify-between border-l-2 border-accent">
+            <div class="text-xs tracking-[.3em] uppercase text-muted">Pieza destacada</div>
+            <div class="serif italic text-lg text-ink" data-caption-b>Mojada de chocolate · N° 01</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: scroll beats -->
+      <div class="lg:col-span-5 space-y-40 py-10">
+        <div class="beat is-active" data-story-beat-b="1" data-caption="Mojada de chocolate · N° 01">
+          <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 01 —</div>
+          <h2 class="serif display-line text-5xl lg:text-6xl leading-[1] text-ink">
+            Mojada de <span class="italic">chocolate.</span>
+          </h2>
+          <div class="hairline w-24 mt-8"></div>
+          <p class="mt-8 text-lg leading-[1.75] text-ink-2 font-light">
+            Bizcocho de cacao extra húmedo con baño brillante y centro de fudge de chocolate al 65%. Coronado con frutos rojos que equilibran la intensidad.
+          </p>
+          <dl class="mt-8 grid grid-cols-2 gap-y-3 text-sm">
+            <dt class="text-muted tracking-[.16em] uppercase text-xs">Porciones</dt><dd class="serif text-lg">8 a 12</dd>
+            <dt class="text-muted tracking-[.16em] uppercase text-xs">Cacao</dt><dd class="serif text-lg">65%</dd>
+            <dt class="text-muted tracking-[.16em] uppercase text-xs">Precio</dt><dd class="serif text-lg text-accent num">USD 25.00</dd>
+          </dl>
+        </div>
+
+        <div class="beat" data-story-beat-b="2" data-caption="Cheesecake estilo N.Y. · N° 02">
+          <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 02 —</div>
+          <h2 class="serif display-line text-5xl lg:text-6xl leading-[1] text-ink">
+            Cheesecake <span class="italic">N.Y.</span>
+          </h2>
+          <div class="hairline w-24 mt-8"></div>
+          <p class="mt-8 text-lg leading-[1.75] text-ink-2 font-light">
+            Horneado al estilo neoyorquino: textura compacta y sedosa, base de galleta mantequillosa. Coronado con frutos rojos para un contraste perfecto.
+          </p>
+          <dl class="mt-8 grid grid-cols-2 gap-y-3 text-sm">
+            <dt class="text-muted tracking-[.16em] uppercase text-xs">Porciones</dt><dd class="serif text-lg">8 a 12</dd>
+            <dt class="text-muted tracking-[.16em] uppercase text-xs">Reposo</dt><dd class="serif text-lg">12 h</dd>
+            <dt class="text-muted tracking-[.16em] uppercase text-xs">Precio</dt><dd class="serif text-lg text-accent num">USD 25.00</dd>
+          </dl>
+        </div>
+
+        <div class="beat" data-story-beat-b="3" data-caption="Galletas · La colección completa">
+          <div class="text-xs tracking-[.3em] uppercase text-accent mb-3">— Pieza Nº 03 —</div>
+          <h2 class="serif display-line text-5xl lg:text-6xl leading-[1] text-ink">
+            La <span class="italic">colección</span> de galletas.
+          </h2>
+          <div class="hairline w-24 mt-8"></div>
+          <p class="mt-8 text-lg leading-[1.75] text-ink-2 font-light">
+            Cuatro sabores ensayados generación tras generación: Clásica, Red Velvet, Zanahoria y Cookie Monster. Cada pieza es de 85 g — para ti, o para compartir en caja.
+          </p>
+          <a href="#coleccion" class="mt-10 inline-flex items-center gap-3 border-b border-ink pb-1.5 text-sm tracking-[.18em] uppercase hover:border-accent hover:text-accent transition magnetic">
+            Ver la colección
+            <svg width="18" height="12" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 7h20M15 1l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORIZONTAL SCROLL - COLECCIÓN -->
+<section id="coleccion" class="bg-paper py-24 border-t border-ink/10 overflow-hidden">
+  <div class="max-w-[88rem] mx-auto px-8 lg:px-16 mb-16">
+    <div class="flex items-end justify-between border-b border-ink/15 pb-8 flex-wrap gap-4">
+      <div>
+        <div class="text-xs tracking-[.3em] uppercase text-muted">Capítulo N° 02</div>
+        <h2 class="serif text-5xl lg:text-6xl mt-3 display-line">La colección de galletas</h2>
+      </div>
+      <div class="text-sm text-muted serif italic">Desliza para hojear la colección →</div>
+    </div>
+  </div>
+
+  <div id="horizontal-pin-b" class="relative">
+    <div id="horizontal-track-b" class="flex gap-12 px-8 lg:px-16 will-change-transform items-start">
+      <article class="h-card w-[380px] shrink-0">
+        <div class="aspect-[4/5] bg-paper-2 overflow-hidden">
+          <img src="../assets/imagenes/postres/p001_img05_761x760.jpeg" alt="Clásica" class="w-full h-full object-cover" />
+        </div>
+        <div class="mt-6">
+          <div class="text-xs tracking-[.24em] uppercase text-muted">N° 01</div>
+          <h3 class="serif text-3xl mt-1.5">Clásica</h3>
+          <p class="text-sm text-ink-2 mt-2 leading-relaxed font-light">Mantequillosa, dorada, con chispas de chocolate negro. Reconfortante.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="serif italic text-lg text-accent num">USD 2.50</span>
+            <span class="text-xs tracking-[.18em] uppercase text-muted">85 g</span>
+          </div>
+        </div>
+      </article>
+      <article class="h-card w-[380px] shrink-0">
+        <div class="aspect-[4/5] bg-paper-2 overflow-hidden">
+          <img src="../assets/imagenes/postres/p001_img03_761x760.jpeg" alt="Red Velvet" class="w-full h-full object-cover" />
+        </div>
+        <div class="mt-6">
+          <div class="text-xs tracking-[.24em] uppercase text-muted">N° 02</div>
+          <h3 class="serif text-3xl mt-1.5">Red Velvet</h3>
+          <p class="text-sm text-ink-2 mt-2 leading-relaxed font-light">Miga aterciopelada con frosting de queso crema. Vistosa, elegante.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="serif italic text-lg text-accent num">USD 2.50</span>
+            <span class="text-xs tracking-[.18em] uppercase text-muted">85 g</span>
+          </div>
+        </div>
+      </article>
+      <article class="h-card w-[380px] shrink-0">
+        <div class="aspect-[4/5] bg-paper-2 overflow-hidden">
+          <img src="../assets/imagenes/postres/p001_img04_766x765.jpeg" alt="Zanahoria" class="w-full h-full object-cover" />
+        </div>
+        <div class="mt-6">
+          <div class="text-xs tracking-[.24em] uppercase text-muted">N° 03</div>
+          <h3 class="serif text-3xl mt-1.5">Zanahoria</h3>
+          <p class="text-sm text-ink-2 mt-2 leading-relaxed font-light">Zanahoria, avena, nueces tostadas. Carrot cake en miniatura.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="serif italic text-lg text-accent num">USD 2.50</span>
+            <span class="text-xs tracking-[.18em] uppercase text-muted">85 g</span>
+          </div>
+        </div>
+      </article>
+      <article class="h-card w-[380px] shrink-0">
+        <div class="aspect-[4/5] bg-paper-2 overflow-hidden">
+          <img src="../assets/imagenes/postres/p001_img02_761x760.jpeg" alt="Cookie monster" class="w-full h-full object-cover" />
+        </div>
+        <div class="mt-6">
+          <div class="text-xs tracking-[.24em] uppercase text-muted">N° 04</div>
+          <h3 class="serif text-3xl mt-1.5">Cookie Monster</h3>
+          <p class="text-sm text-ink-2 mt-2 leading-relaxed font-light">Azul vibrante, ojos de chocolate, relleno 100% Nutella.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="serif italic text-lg text-accent num">USD 2.50</span>
+            <span class="text-xs tracking-[.18em] uppercase text-muted">85 g</span>
+          </div>
+        </div>
+      </article>
+      <!-- Editorial note card -->
+      <article class="h-card w-[380px] shrink-0 bg-ink text-paper p-10 self-stretch flex flex-col justify-between min-h-[560px]">
+        <div>
+          <div class="text-xs tracking-[.3em] uppercase text-gold">— Nota editorial —</div>
+          <h3 class="serif text-3xl mt-4 leading-tight">Las cajas, una tradición.</h3>
+          <p class="text-sm mt-5 text-paper/70 leading-relaxed">
+            Cada caja es una invitación. La caja familiar de 6 unidades es la pieza más vendida — pensada para la sobremesa.
+          </p>
+        </div>
+        <div class="space-y-3 text-sm border-t border-paper/15 pt-6 num">
+          <div class="flex justify-between"><span class="text-paper/70">Por unidad</span><span class="serif italic text-gold">USD 2.50</span></div>
+          <div class="flex justify-between"><span class="text-paper/70">Pareja · 4 und</span><span class="serif italic text-gold">USD 9.40</span></div>
+          <div class="flex justify-between"><span class="text-paper/70">Familiar · 6 und</span><span class="serif italic text-gold">USD 13.50</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LAS CASAS - SUB-BRANDS -->
+<section id="casas" class="bg-ink text-paper py-24 lg:py-32 relative overflow-hidden grain">
+  <div class="max-w-[88rem] mx-auto px-8 lg:px-16">
+    <div class="grid lg:grid-cols-12 gap-12 mb-20">
+      <div class="lg:col-span-5">
+        <div class="text-xs tracking-[.3em] uppercase text-gold">— Capítulo N° 03 —</div>
+        <h2 class="serif display-line text-5xl lg:text-6xl mt-5">Las cinco<br/><span class="italic">casas.</span></h2>
+      </div>
+      <p class="lg:col-span-5 lg:col-start-8 text-lg leading-[1.75] text-paper/70 font-light self-end">
+        Cinco especialidades, una sola filosofía. Cada casa es una conversación distinta con la cocina: pan, carne, conserva, postre, agua. Pero todas hablan el mismo idioma — el del cuidado.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-px bg-paper/15">
+      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+        <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 01</div>
+        <div class="serif italic text-4xl mt-2">Grön</div>
+        <div class="hairline bg-paper mt-6 w-12"></div>
+        <p class="text-sm text-paper/70 mt-6 leading-relaxed">Panadería — el arte del grano en tu paladar.</p>
+      </div>
+      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+        <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 02</div>
+        <div class="serif italic text-4xl mt-2">Kúa</div>
+        <div class="hairline bg-paper mt-6 w-12"></div>
+        <p class="text-sm text-paper/70 mt-6 leading-relaxed">Cárnicos de pollo, cortes cuidados y marinados.</p>
+      </div>
+      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+        <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 03</div>
+        <div class="serif italic text-4xl mt-2">Morifruti</div>
+        <div class="hairline bg-paper mt-6 w-12"></div>
+        <p class="text-sm text-paper/70 mt-6 leading-relaxed">Mermeladas naturales con frutos reales.</p>
+      </div>
+      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+        <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 04</div>
+        <div class="serif italic text-4xl mt-2">Piñaji</div>
+        <div class="hairline bg-paper mt-6 w-12"></div>
+        <p class="text-sm text-paper/70 mt-6 leading-relaxed">Encurtidos artesanales, sabor auténtico.</p>
+      </div>
+      <div class="bg-ink p-8 hover:bg-ink/70 transition group editorial-card" data-house>
+        <div class="text-xs tracking-[.3em] uppercase text-gold">Casa N° 05</div>
+        <div class="serif italic text-4xl mt-2">Del Bosque</div>
+        <div class="hairline bg-paper mt-6 w-12"></div>
+        <p class="text-sm text-paper/70 mt-6 leading-relaxed">Agua embotellada de la naturaleza.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFIESTO -->
+<section id="manifiesto" class="bg-paper py-32 lg:py-40 relative overflow-hidden">
+  <div class="max-w-5xl mx-auto px-8 lg:px-16">
+    <div class="text-xs tracking-[.3em] uppercase text-muted text-center mb-12">— El manifiesto —</div>
+    <p class="quote-mark serif text-[clamp(1.75rem,3.5vw,3.25rem)] leading-[1.3] text-ink" id="manifesto-quote">
+      <em>De la Abuela y el Lobo</em> no es solo una marca. Es una historia que se cuenta con cada producto, una mesa que siempre tiene espacio para uno más, y una invitación a reconectar con lo esencial.
+    </p>
+    <div class="mt-14 grid md:grid-cols-4 gap-10 text-center md:text-left">
+      <div data-value>
+        <div class="text-xs tracking-[.3em] uppercase text-accent">01</div>
+        <div class="serif italic text-2xl mt-3">Calidad</div>
+        <p class="text-sm text-muted mt-2 leading-relaxed">Productos buenos cumpliendo los estándares de pureza.</p>
+      </div>
+      <div data-value>
+        <div class="text-xs tracking-[.3em] uppercase text-accent">02</div>
+        <div class="serif italic text-2xl mt-3">Accesibilidad</div>
+        <p class="text-sm text-muted mt-2 leading-relaxed">Lo artesanal puesto al alcance de todos.</p>
+      </div>
+      <div data-value>
+        <div class="text-xs tracking-[.3em] uppercase text-accent">03</div>
+        <div class="serif italic text-2xl mt-3">Sostenibilidad</div>
+        <p class="text-sm text-muted mt-2 leading-relaxed">Prácticas responsables en producción y distribución.</p>
+      </div>
+      <div data-value>
+        <div class="text-xs tracking-[.3em] uppercase text-accent">04</div>
+        <div class="serif italic text-2xl mt-3">Cercanía</div>
+        <p class="text-sm text-muted mt-2 leading-relaxed">Una marca en la que se puede confiar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contacto" class="bg-paper-2 py-24 lg:py-32">
+  <div class="max-w-4xl mx-auto px-8 text-center">
+    <h2 class="serif display-line text-5xl lg:text-7xl text-ink leading-[1]" id="cta-title">
+      Reserve su <span class="italic text-accent">pieza.</span>
+    </h2>
+    <p class="mt-8 text-lg text-ink-2 max-w-2xl mx-auto leading-[1.7] font-light">
+      Hacemos cada producto con tiempo. Para pedidos personalizados, eventos o catálogo completo, contáctenos directamente.
+    </p>
+    <div class="mt-12 flex flex-wrap justify-center gap-6">
+      <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-ink text-paper px-10 py-5 tracking-[.18em] uppercase text-sm hover:bg-accent transition">
+        WhatsApp · 099 744 8167
+      </a>
+      <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 border border-ink px-10 py-5 tracking-[.18em] uppercase text-sm hover:bg-ink hover:text-paper transition">
+        contacto@comdelbosque.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-paper/60 py-16 border-t border-paper/10">
+  <div class="max-w-[88rem] mx-auto px-8 lg:px-16 grid md:grid-cols-4 gap-12">
+    <div>
+      <div class="flex flex-col leading-tight">
+        <span class="serif italic text-3xl text-paper">D'</span>
+        <span class="text-xs tracking-[.32em] uppercase text-paper -mt-1">Abuela &amp; Lobo</span>
+      </div>
+      <p class="mt-6 text-sm leading-relaxed">Una colección curada de productos artesanales hechos con ingredientes reales.</p>
+    </div>
+    <div>
+      <h4 class="text-paper text-xs tracking-[.24em] uppercase mb-5">Las casas</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a class="hover:text-gold serif italic" href="#">Grön</a></li>
+        <li><a class="hover:text-gold serif italic" href="#">Kúa</a></li>
+        <li><a class="hover:text-gold serif italic" href="#">Morifruti</a></li>
+        <li><a class="hover:text-gold serif italic" href="#">Piñaji</a></li>
+        <li><a class="hover:text-gold serif italic" href="#">Del Bosque</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-paper text-xs tracking-[.24em] uppercase mb-5">Editorial</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a class="hover:text-gold" href="#manifiesto">El manifiesto</a></li>
+        <li><a class="hover:text-gold" href="#editorial">La filosofía</a></li>
+        <li><a class="hover:text-gold" href="#coleccion">La colección</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-paper text-xs tracking-[.24em] uppercase mb-5">Contacto</h4>
+      <ul class="space-y-3 text-sm">
+        <li>099 744 8167</li>
+        <li>contacto@comdelbosque.com</li>
+        <li>www.comdelbosque.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-16 pt-6 border-t border-paper/10 max-w-[88rem] mx-auto px-8 lg:px-16 text-xs text-paper/30 flex justify-between">
+    <span>© 2026 D' La Abuela y el Lobo</span>
+    <span class="tracking-[.24em] uppercase">Hecho con tiempo en Ecuador</span>
+  </div>
+</footer>
+
+<script>
+  // ============ LENIS SMOOTH SCROLL (defensive: fallback to native if CDN fails) ============
+  let lenis = null;
+  try {
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.3,
+        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        smoothTouch: false,
+      });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+  } catch (e) { console.warn('Lenis init failed, falling back to native scroll', e); }
+
+  gsap.registerPlugin(ScrollTrigger);
+  if (lenis) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // ============ PROGRESS ============
+  const progress = document.getElementById('progress');
+  ScrollTrigger.create({
+    trigger: 'body', start: 'top top', end: 'bottom bottom',
+    onUpdate: self => { progress.style.width = (self.progress * 100) + '%'; }
+  });
+
+  // ============ CURSOR ============
+  const cursor = document.getElementById('cursor');
+  let mx = 0, my = 0, cx = 0, cy = 0;
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function loop(){
+    cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
+    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button, .magnetic, .editorial-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+  });
+
+  // ============ MAGNETIC (subtle, slower for editorial feel) ============
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      gsap.to(btn, { x: x * 0.18, y: y * 0.18, duration: 0.6, ease: 'power2.out' });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: 'power3.out' });
+    });
+  });
+
+  // ============ HERO REVEAL ============
+  const tl = gsap.timeline({ delay: 0.1 });
+  tl.from('[data-hero-tag]', { opacity: 0, y: 14, duration: 0.6, stagger: 0.06, ease: 'power3.out' })
+    .to('.split-line .word', {
+      y: 0, opacity: 1, duration: 0.7, stagger: 0.05, ease: 'power3.out'
+    }, '-=0.4')
+    .from('[data-reveal]', { opacity: 0, y: 20, duration: 0.7, stagger: 0.1, ease: 'power3.out' }, '-=0.5');
+
+  // Hero image clip reveal — use fromTo for reliability
+  gsap.fromTo('#hero-img',
+    { clipPath: 'inset(0 100% 0 0)' },
+    { clipPath: 'inset(0 0% 0 0)', duration: 1.2, delay: 0.3, ease: 'power3.out' }
+  );
+
+  // ============ FAILSAFE: ensure hero shows even if anim fails ============
+  setTimeout(() => {
+    document.querySelectorAll('.split-line .word').forEach(w => {
+      if (getComputedStyle(w).opacity === '0') {
+        w.style.opacity = '1';
+        w.style.transform = 'none';
+      }
+    });
+    const heroImg = document.getElementById('hero-img');
+    if (heroImg && heroImg.style.clipPath !== 'inset(0px 0% 0px 0px)') {
+      heroImg.style.clipPath = 'inset(0 0% 0 0)';
+    }
+  }, 2500);
+
+  // Floating card (subtle parallax)
+  gsap.to('[data-card-float]', {
+    y: -40,
+    scrollTrigger: { trigger: '[data-card-float]', start: 'top bottom', end: 'bottom top', scrub: 1.2 }
+  });
+
+  // ============ STICKY STORY (Pieza destacada) ============
+  const beats = gsap.utils.toArray('[data-story-beat-b]');
+  const imgs = gsap.utils.toArray('[data-story-img-b]');
+  const caption = document.querySelector('[data-caption-b]');
+  beats.forEach((b, i) => {
+    ScrollTrigger.create({
+      trigger: b, start: 'top 60%', end: 'bottom 40%',
+      onEnter: () => activateB(i),
+      onEnterBack: () => activateB(i),
+    });
+  });
+  function activateB(i) {
+    beats.forEach((b, idx) => b.classList.toggle('is-active', idx === i));
+    imgs.forEach((img, idx) => gsap.to(img, { opacity: idx === i ? 1 : 0, duration: 0.7 }));
+    if (caption && beats[i]?.dataset.caption) caption.textContent = beats[i].dataset.caption;
+  }
+
+  // ============ HORIZONTAL SCROLL (desktop only, editorial pacing) ============
+  ScrollTrigger.matchMedia({
+    "(min-width: 1024px)": function() {
+      const track = document.getElementById('horizontal-track-b');
+      if (track) {
+        const total = track.scrollWidth - window.innerWidth + 100;
+        gsap.to(track, {
+          x: -total,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#horizontal-pin-b',
+            pin: true,
+            start: 'top 100px',
+            end: () => '+=' + total,
+            scrub: 1.5,
+            invalidateOnRefresh: true,
+          }
+        });
+      }
+    },
+    "(max-width: 1023px)": function() {
+      const pin = document.getElementById('horizontal-pin-b');
+      if (pin) pin.style.overflowX = 'auto';
+    }
+  });
+
+  // ============ REVEALS ============
+  // Editorial quote fade
+  gsap.utils.toArray('[data-fade-quote]').forEach(el => {
+    gsap.from(el, {
+      opacity: 0, y: 30, duration: 1.4, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 75%' }
+    });
+  });
+  // Houses cards
+  gsap.from('[data-house]', {
+    opacity: 0, y: 40, duration: 1, stagger: 0.12, ease: 'power3.out',
+    scrollTrigger: { trigger: '#casas', start: 'top 60%' }
+  });
+  // Values
+  gsap.from('[data-value]', {
+    opacity: 0, y: 25, duration: 0.9, stagger: 0.15, ease: 'power3.out',
+    scrollTrigger: { trigger: '#manifiesto', start: 'top 55%' }
+  });
+  // Manifesto quote — slow fade in
+  gsap.from('#manifesto-quote', {
+    opacity: 0, y: 30, duration: 1.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '#manifesto-quote', start: 'top 75%' }
+  });
+  // CTA
+  gsap.from('#cta-title', {
+    opacity: 0, y: 40, duration: 1.2, ease: 'power3.out',
+    scrollTrigger: { trigger: '#cta-title', start: 'top 80%' }
+  });
+
+  // ============ MOBILE MENU ============
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function openMenu() { mobileMenu.classList.add('open'); if (lenis) lenis.stop(); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('open'); if (lenis) lenis.start(); document.body.style.overflow = ''; }
+  if (menuToggle) menuToggle.addEventListener('click', openMenu);
+  if (menuClose) menuClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('[data-menu-link]').forEach(l => l.addEventListener('click', closeMenu));
+
+  // ============ LAZY LOAD non-hero ============
+  document.querySelectorAll('img').forEach((img, i) => { if (i > 1) img.loading = 'lazy'; });
+</script>
+</body>
+</html>

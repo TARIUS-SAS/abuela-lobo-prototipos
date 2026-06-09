@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prototipos · D' La Abuela y el Lobo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; background: #F5F1E8; color: #1A1611; }
+  .serif { font-family: 'Fraunces', serif; }
+  .card { transition: transform .3s, box-shadow .3s; }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -16px rgba(0,0,0,.15); }
+  iframe { background: #fff; }
+  /* Mobile: hide iframe previews (they don't render well in tiny scale on touch), show gradient hero instead */
+  @media (max-width: 768px) {
+    .preview-iframe { display: none; }
+    .preview-mobile { display: grid !important; }
+  }
+  .preview-mobile { display: none; }
+</style>
+</head>
+<body class="antialiased">
+<div class="max-w-7xl mx-auto px-6 lg:px-10 py-12 lg:py-20">
+  <header class="text-center mb-14">
+    <div class="text-xs tracking-[.3em] uppercase text-[#B92214] font-bold mb-3">Revisión interna</div>
+    <h1 class="serif font-bold text-5xl lg:text-7xl leading-[1.05]">3 prototipos para escoger</h1>
+    <p class="mt-5 text-lg text-[#5E594F] max-w-2xl mx-auto">
+      Tres direcciones visuales completas para la página de <strong>D' La Abuela y el Lobo</strong>. Cliente elige una, luego iteramos con su feedback.
+    </p>
+    <div class="mt-6 inline-flex items-center gap-3 bg-white border border-[#1A1611]/10 rounded-full px-5 py-2 text-sm text-[#5E594F]">
+      <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> Todos usan colores y fotos reales del manual y catálogo
+    </div>
+  </header>
+
+  <!-- 3 Prototipos -->
+  <div class="grid lg:grid-cols-3 gap-8">
+
+    <!-- A -->
+    <article class="card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#1A1611]/5">
+      <a href="A-tradicion-calida/index.html" class="block">
+        <div class="aspect-[4/3] bg-gradient-to-br from-[#FDF9F2] to-[#F5EBD7] relative overflow-hidden">
+          <iframe src="A-tradicion-calida/index.html" class="preview-iframe absolute inset-0 w-[400%] h-[400%] origin-top-left scale-[.25] border-0" loading="lazy" title="Prototipo A preview"></iframe>
+          <div class="preview-mobile absolute inset-0 place-items-center text-center p-6">
+            <div>
+              <div class="text-5xl mb-3">📔</div>
+              <div class="font-serif font-bold text-2xl text-[#B92214]">Tradición Cálida</div>
+              <div class="text-xs text-[#5E594F] mt-2">Vintage notebook + animaciones modernas</div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="p-7">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="w-9 h-9 bg-[#B92214] text-white rounded-full grid place-items-center font-bold">A</span>
+          <span class="text-xs uppercase tracking-wider font-bold text-[#B92214]">Tradición Cálida</span>
+        </div>
+        <h2 class="serif font-bold text-2xl">Familiar, cálido, emocional</h2>
+        <p class="mt-3 text-sm text-[#5E594F] leading-relaxed">
+          Inspirado en <strong>Productos Olé</strong> (la referencia que le gustó al cliente). Rojo + ámbar cálidos, fotos generosas, claim emocional, productos en grid amable.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="bg-[#FDF9F2] text-[#B92214] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#B92214]/20">Cálido</span>
+          <span class="bg-[#FDF9F2] text-[#B92214] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#B92214]/20">Familiar</span>
+          <span class="bg-[#FDF9F2] text-[#B92214] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#B92214]/20">Productos al frente</span>
+        </div>
+        <a href="A-tradicion-calida/index.html" class="mt-6 inline-flex items-center gap-2 w-full justify-center bg-[#B92214] hover:bg-[#8A1A0F] text-white font-semibold px-5 py-3 rounded-full transition">
+          Ver prototipo A →
+        </a>
+      </div>
+    </article>
+
+    <!-- B -->
+    <article class="card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#1A1611]/5">
+      <a href="B-editorial-premium/index.html" class="block">
+        <div class="aspect-[4/3] bg-gradient-to-br from-[#F8F4ED] to-[#ECE4D3] relative overflow-hidden">
+          <iframe src="B-editorial-premium/index.html" class="preview-iframe absolute inset-0 w-[400%] h-[400%] origin-top-left scale-[.25] border-0" loading="lazy" title="Prototipo B preview"></iframe>
+          <div class="preview-mobile absolute inset-0 place-items-center text-center p-6">
+            <div>
+              <div class="text-5xl mb-3">📰</div>
+              <div class="font-serif font-bold text-2xl text-[#14110D]">Editorial Premium</div>
+              <div class="text-xs text-[#5E594F] mt-2">Magazine style + scroll storytelling</div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="p-7">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="w-9 h-9 bg-[#14110D] text-white rounded-full grid place-items-center font-bold">B</span>
+          <span class="text-xs uppercase tracking-wider font-bold text-[#14110D]">Editorial Premium</span>
+        </div>
+        <h2 class="serif font-bold text-2xl">Sofisticado, gourmet, magazine</h2>
+        <p class="mt-3 text-sm text-[#5E594F] leading-relaxed">
+          Crema/kraft con serif Playfair, mucho whitespace, tratamiento editorial. Productos como "colección". Posiciona la marca como <strong>premium artesanal</strong>.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="bg-[#ECE4D3] text-[#14110D] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#14110D]/15">Premium</span>
+          <span class="bg-[#ECE4D3] text-[#14110D] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#14110D]/15">Editorial</span>
+          <span class="bg-[#ECE4D3] text-[#14110D] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#14110D]/15">Minimalista</span>
+        </div>
+        <a href="B-editorial-premium/index.html" class="mt-6 inline-flex items-center gap-2 w-full justify-center bg-[#14110D] hover:bg-[#3C362E] text-white font-semibold px-5 py-3 rounded-full transition">
+          Ver prototipo B →
+        </a>
+      </div>
+    </article>
+
+    <!-- C -->
+    <article class="card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#1A1611]/5">
+      <a href="C-folklore-moderno/index.html" class="block">
+        <div class="aspect-[4/3] bg-gradient-to-br from-[#FDF9F2] via-[#DFA84C]/20 to-[#4B92DE]/20 relative overflow-hidden">
+          <iframe src="C-folklore-moderno/index.html" class="preview-iframe absolute inset-0 w-[400%] h-[400%] origin-top-left scale-[.25] border-0" loading="lazy" title="Prototipo C preview"></iframe>
+          <div class="preview-mobile absolute inset-0 place-items-center text-center p-6">
+            <div>
+              <div class="text-5xl mb-3">🐺👵</div>
+              <div class="font-serif font-bold text-2xl text-[#B92214]">Folklore Moderno</div>
+              <div class="text-xs text-[#5E594F] mt-2">Bento + bouncy + personajes</div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="p-7">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="w-9 h-9 bg-gradient-to-br from-[#B92214] to-[#DFA84C] text-white rounded-full grid place-items-center font-bold">C</span>
+          <span class="text-xs uppercase tracking-wider font-bold text-[#B92214]">Folklore Moderno</span>
+        </div>
+        <h2 class="serif font-bold text-2xl">Vibrante, divertido, con personalidad</h2>
+        <p class="mt-3 text-sm text-[#5E594F] leading-relaxed">
+          Los 5 colores con audacia. Bento grid, marquee, personajes <strong>Abuela vs Lobo</strong>, microinteracciones. Para una marca que quiere <strong>destacar en redes</strong>.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="bg-[#FDF9F2] text-[#B92214] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#B92214]/20">Bold</span>
+          <span class="bg-[#FDF9F2] text-[#B92214] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#B92214]/20">Personajes</span>
+          <span class="bg-[#FDF9F2] text-[#B92214] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#B92214]/20">Redes-friendly</span>
+        </div>
+        <a href="C-folklore-moderno/index.html" class="mt-6 inline-flex items-center gap-2 w-full justify-center bg-gradient-to-r from-[#B92214] to-[#DFA84C] text-white font-semibold px-5 py-3 rounded-full transition hover:opacity-90">
+          Ver prototipo C →
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Comparativa -->
+  <section class="mt-20">
+    <h2 class="serif font-bold text-3xl text-center mb-10">Comparativa rápida</h2>
+    <div class="bg-white rounded-2xl overflow-x-auto shadow-sm border border-[#1A1611]/5">
+      <table class="w-full text-sm min-w-[720px]">
+        <thead>
+          <tr class="border-b border-[#1A1611]/10">
+            <th class="text-left p-5 font-semibold text-[#5E594F] uppercase tracking-wider text-xs">Dimensión</th>
+            <th class="text-left p-5 font-bold text-[#B92214]">A · Tradición Cálida</th>
+            <th class="text-left p-5 font-bold text-[#14110D]">B · Editorial Premium</th>
+            <th class="text-left p-5 font-bold bg-gradient-to-r from-[#B92214] to-[#DFA84C] bg-clip-text text-transparent">C · Folklore Moderno</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#1A1611]/5">
+          <tr><td class="p-5 font-semibold">Mood</td><td class="p-5">Cálido, familiar</td><td class="p-5">Sofisticado, gourmet</td><td class="p-5">Vibrante, con personalidad</td></tr>
+          <tr><td class="p-5 font-semibold">Audiencia ideal</td><td class="p-5">Familias, hogar</td><td class="p-5">Foodies, gourmet, regalos premium</td><td class="p-5">Jóvenes adultos, redes sociales</td></tr>
+          <tr><td class="p-5 font-semibold">Paleta dominante</td><td class="p-5">Rojo + ámbar + crema</td><td class="p-5">Crema/kraft + rojo solo en CTAs</td><td class="p-5">Los 5 colores con audacia</td></tr>
+          <tr><td class="p-5 font-semibold">Tipografía</td><td class="p-5">Fraunces (serif rounded)</td><td class="p-5">Playfair (serif clásico)</td><td class="p-5">Caprasimo (display chunky)</td></tr>
+          <tr><td class="p-5 font-semibold">Diferenciación</td><td class="p-5">Media</td><td class="p-5">Alta (se ve premium)</td><td class="p-5">Muy alta (memorable)</td></tr>
+          <tr><td class="p-5 font-semibold">Riesgo</td><td class="p-5">Bajo (familiar pero menos "wow")</td><td class="p-5">Medio (puede sentirse frío)</td><td class="p-5">Medio-alto (puede polarizar)</td></tr>
+          <tr><td class="p-5 font-semibold">Inspiración</td><td class="p-5">Productos Olé</td><td class="p-5">Revistas Bon Appétit, delis premium</td><td class="p-5">Brands artesanales modernas</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Próximos pasos -->
+  <section class="mt-16 bg-[#14110D] text-[#FDF9F2] rounded-3xl p-10 lg:p-14">
+    <h2 class="serif font-bold text-3xl">Próximos pasos</h2>
+    <ol class="mt-6 space-y-4 text-[#FDF9F2]/85">
+      <li><strong class="text-[#DFA84C]">1.</strong> Cliente revisa los 3 prototipos y elige UNO como dirección.</li>
+      <li><strong class="text-[#DFA84C]">2.</strong> Recoger feedback específico: qué le gusta, qué cambia, qué adapta del otro.</li>
+      <li><strong class="text-[#DFA84C]">3.</strong> Bootstrap del proyecto real en <strong>Next.js + shadcn/ui + Tailwind</strong>.</li>
+      <li><strong class="text-[#DFA84C]">4.</strong> Construir el design system formal con tokens basados en la dirección elegida.</li>
+      <li><strong class="text-[#DFA84C]">5.</strong> Implementar el sitio completo (incluyendo páginas internas, e-commerce/contacto, optimización SEO, performance).</li>
+    </ol>
+    <div class="mt-8 text-sm text-[#FDF9F2]/60">
+      Stack confirmado: Next.js 15 · shadcn/ui · Tailwind v4 · Framer Motion · Vercel hosting · TypeScript
+    </div>
+  </section>
+</div>
+</body>
+</html>

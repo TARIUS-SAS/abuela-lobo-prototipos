@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>D' La Abuela y el Lobo — Tradición con mordisco</title>
+<meta name="description" content="Sabores caseros con identidad propia. Recetas familiares con una mirada contemporánea. Auténtico, cercano, con carácter." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:wght@600;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        red:    '#B92214',
+        amber:  '#DFA84C',
+        blue:   '#4B92DE',
+        slate:  '#5C7289',
+        cocoa:  '#5E594F',
+        cream:  '#FDF9F2',
+        bone:   '#F5EBD7',
+        ink:    '#1A1611',
+      },
+      fontFamily: {
+        chunky: ['Caprasimo', 'serif'],
+        sans:   ['"DM Sans"', 'system-ui', 'sans-serif'],
+        serif:  ['Fraunces', 'serif'],
+      },
+    },
+  },
+};
+</script>
+<style>
+  html, body { margin:0; padding:0; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: #FDF9F2; color: #1A1611; overflow-x: hidden; }
+  .font-chunky { font-family: 'Caprasimo', serif; }
+  .font-serif-c { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .marquee { display:flex; gap: 2rem; animation: scroll 28s linear infinite; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .stamp { transform: rotate(-3deg); }
+  .stamp-r { transform: rotate(3deg); }
+  .wobble { transition: transform .3s cubic-bezier(.36,1.5,.64,1); }
+  .wobble:hover { transform: rotate(-1.5deg) scale(1.02); }
+  .tape { position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-2deg); width:80px; height:24px; background:#DFA84C; opacity:.85; mix-blend-mode:multiply; box-shadow:0 2px 4px rgba(0,0,0,.1); }
+  .underline-wavy {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'%3E%3Cpath d='M0,6 Q12.5,0 25,6 T50,6 T75,6 T100,6' stroke='%23B92214' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: 0 92%; background-size: 100% 12px; padding-bottom: 12px;
+  }
+  .blob { border-radius: 38% 62% 65% 35% / 41% 35% 65% 59%; animation: morph 8s ease-in-out infinite; }
+  @keyframes morph { 0%,100% { border-radius: 38% 62% 65% 35% / 41% 35% 65% 59%; } 50% { border-radius: 62% 38% 35% 65% / 59% 65% 35% 41%; } }
+  .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.07; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  /* Lenis */
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  /* Cursor — playful, switches color */
+  #cursor {
+    position: fixed; top:0; left:0; width:18px; height:18px; border-radius:50%;
+    background:#B92214; pointer-events:none; z-index:1000;
+    transition: opacity .25s, width .25s, height .25s, background .35s;
+    transform: translate(-50%,-50%); box-shadow: 0 4px 12px rgba(185,34,20,.35);
+  }
+  #cursor.big { width:56px; height:56px; background:#DFA84C; box-shadow: 0 4px 16px rgba(223,168,76,.45); }
+  #cursor.cocoa { background:#1A1611; }
+  @media (max-width: 1024px) { #cursor { display:none; } }
+  /* Progress */
+  #progress {
+    position: fixed; top:0; left:0; height:4px; width:0%;
+    background: linear-gradient(90deg, #B92214, #DFA84C, #4B92DE);
+    z-index:100; transition: width .08s linear;
+  }
+  .magnetic { display:inline-block; will-change: transform; }
+  /* Bento boxes — initial state for animation */
+  .bento-item { will-change: transform, opacity; }
+  /* Character side reveal */
+  .char-card { will-change: transform, opacity; }
+  /* Split text */
+  .split-char { display: inline-block; opacity: 0; transform: translateY(60px) rotate(8deg) scale(0.8); }
+  /* Sticker hover */
+  .sticker { transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
+  .sticker:hover { transform: rotate(-5deg) scale(1.05); }
+  ::selection { background:#DFA84C; color:#1A1611; }
+  /* Touch */
+  @media (hover: none) and (pointer: coarse) {
+    .magnetic { transform: none !important; }
+    #cursor { display: none !important; }
+  }
+  /* Mobile menu */
+  #mobile-menu {
+    position: fixed; inset: 0; z-index: 60; background: #1A1611; color: #FDF9F2;
+    transform: translateY(-100%); transition: transform .45s cubic-bezier(.83, 0, .17, 1);
+    overflow-y: auto;
+  }
+  #mobile-menu.open { transform: translateY(0); }
+  /* Mobile bento - simplify grid */
+  @media (max-width: 1023px) {
+    .bento-mobile {
+      grid-template-columns: repeat(2, 1fr) !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: auto !important;
+      height: auto !important;
+      gap: 10px !important;
+    }
+    .bento-mobile > [data-bento="1"] { grid-column: span 2; aspect-ratio: 4/3; }
+    .bento-mobile > [data-bento="2"] { aspect-ratio: 1; }
+    .bento-mobile > [data-bento="3"] { aspect-ratio: 1; }
+    .bento-mobile > [data-bento="4"] { aspect-ratio: 1; }
+    .bento-mobile > [data-bento="5"] { aspect-ratio: 1; }
+    .bento-mobile > [data-bento] { row-span: auto !important; col-span: auto !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<!-- TOP BANNER -->
+<div class="bg-ink text-cream py-2.5 overflow-hidden">
+  <div class="marquee whitespace-nowrap text-sm font-medium">
+    <div class="flex items-center gap-8 px-4">
+      <span>🐺 Hecho con instinto</span><span>·</span>
+      <span>👵 Hecho con memoria</span><span>·</span>
+      <span>🍪 Galletas desde $2.50</span><span>·</span>
+      <span>🚚 Envíos en Ecuador</span><span>·</span>
+      <span>🐺 Hecho con instinto</span><span>·</span>
+      <span>👵 Hecho con memoria</span><span>·</span>
+      <span>🍪 Galletas desde $2.50</span><span>·</span>
+      <span>🚚 Envíos en Ecuador</span><span>·</span>
+    </div>
+    <div class="flex items-center gap-8 px-4" aria-hidden="true">
+      <span>🐺 Hecho con instinto</span><span>·</span>
+      <span>👵 Hecho con memoria</span><span>·</span>
+      <span>🍪 Galletas desde $2.50</span><span>·</span>
+      <span>🚚 Envíos en Ecuador</span><span>·</span>
+      <span>🐺 Hecho con instinto</span><span>·</span>
+      <span>👵 Hecho con memoria</span><span>·</span>
+      <span>🍪 Galletas desde $2.50</span><span>·</span>
+      <span>🚚 Envíos en Ecuador</span><span>·</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="sticky top-0 z-40 bg-cream/90 backdrop-blur-md border-b-2 border-ink">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 h-16 lg:h-20 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2.5" data-nav-anim>
+      <div class="relative">
+        <div class="w-9 h-9 lg:w-11 lg:h-11 rounded-full bg-red grid place-items-center text-cream text-lg lg:text-xl">🐺</div>
+        <div class="absolute -bottom-1 -right-2 w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-amber grid place-items-center text-sm lg:text-base border-2 border-cream">👵</div>
+      </div>
+      <div class="font-chunky text-lg lg:text-xl leading-none">Abuela <span class="text-red">&amp;</span> Lobo</div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold" data-nav-anim>
+      <a class="hover:text-red transition" href="#productos">Productos</a>
+      <a class="hover:text-red transition" href="#personajes">Los personajes</a>
+      <a class="hover:text-red transition" href="#marcas">Las marcas</a>
+      <a class="hover:text-red transition" href="#historia">Historia</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="#contacto" class="magnetic hidden sm:inline-flex items-center gap-2 bg-red text-cream font-bold text-sm px-4 lg:px-5 py-2 lg:py-2.5 rounded-full transition hover:bg-ink" data-nav-anim>
+        <span>Pide ya</span>
+        <span class="text-base">🐺</span>
+      </a>
+      <button id="menu-toggle" class="lg:hidden w-11 h-11 grid place-items-center bg-ink text-cream rounded-full" aria-label="Abrir menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="lg:hidden">
+  <div class="flex items-center justify-between p-5 border-b border-cream/15">
+    <div class="flex items-center gap-2.5">
+      <div class="relative">
+        <div class="w-10 h-10 rounded-full bg-red grid place-items-center text-cream text-lg">🐺</div>
+        <div class="absolute -bottom-1 -right-2 w-7 h-7 rounded-full bg-amber grid place-items-center text-base border-2 border-ink">👵</div>
+      </div>
+      <div class="font-chunky text-lg">Abuela <span class="text-amber">&amp;</span> Lobo</div>
+    </div>
+    <button id="menu-close" class="w-11 h-11 grid place-items-center bg-amber text-ink rounded-full" aria-label="Cerrar menú">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav class="px-8 py-12 flex flex-col gap-3">
+    <a class="font-chunky text-4xl text-cream hover:text-amber transition py-3 border-b border-cream/10" href="#productos" data-menu-link>🍪 Productos</a>
+    <a class="font-chunky text-4xl text-cream hover:text-amber transition py-3 border-b border-cream/10" href="#personajes" data-menu-link>🐺 Los personajes</a>
+    <a class="font-chunky text-4xl text-cream hover:text-amber transition py-3 border-b border-cream/10" href="#marcas" data-menu-link>✨ Las marcas</a>
+    <a class="font-chunky text-4xl text-cream hover:text-amber transition py-3 border-b border-cream/10" href="#historia" data-menu-link>📖 Historia</a>
+    <a class="font-chunky text-4xl text-amber hover:text-red transition py-3" href="#contacto" data-menu-link>👉 Pide ya</a>
+    <div class="mt-8 pt-8 border-t border-cream/10">
+      <div class="font-chunky text-2xl text-amber">099 744 8167</div>
+      <a href="mailto:contacto@comdelbosque.com" class="text-sm text-cream/70 mt-1 inline-block">contacto@comdelbosque.com</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="relative overflow-hidden bg-cream grain pt-12 lg:pt-20 pb-16 lg:pb-32">
+  <div class="absolute top-20 right-[-100px] w-[400px] h-[400px] bg-amber/30 blob" data-blob="1"></div>
+  <div class="absolute bottom-0 left-[-80px] w-[280px] h-[280px] bg-blue/20 blob" style="animation-delay:-3s" data-blob="2"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center gap-2 bg-ink text-cream px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase stamp" data-hero-elem>
+          <span class="w-1.5 h-1.5 rounded-full bg-amber"></span> Edición 2025
+        </div>
+        <h1 class="font-chunky text-[clamp(2.5rem,9vw,8.5rem)] leading-[.9] mt-6 text-ink">
+          <div data-split-c>Tradición</div>
+          <div><span class="text-red" data-split-c>con</span> <span class="relative inline-block"><span class="underline-wavy" data-split-c>mordisco.</span></span></div>
+        </h1>
+        <p class="mt-8 text-xl text-cocoa max-w-xl leading-relaxed" data-hero-elem>
+          Sabores caseros con identidad propia. Recetas familiares + mirada contemporánea. Lo que cocina la abuela con el carácter del lobo. <strong class="text-ink">Sin tendencias. Solo memoria del paladar.</strong>
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3" data-hero-elem>
+          <a href="#productos" class="magnetic group inline-flex items-center gap-2 bg-ink text-cream font-bold px-7 py-4 rounded-full text-base hover:bg-red transition">
+            Ver el menú
+            <svg class="transition group-hover:translate-x-1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#personajes" class="magnetic inline-flex items-center gap-2 bg-amber text-ink font-bold px-7 py-4 rounded-full text-base hover:bg-ink hover:text-cream transition">
+            Conoce a los personajes 🐺
+          </a>
+        </div>
+        <div class="mt-12 grid grid-cols-3 gap-6 max-w-md" data-hero-elem>
+          <div>
+            <div class="font-chunky text-4xl text-red" data-counter="5">0</div>
+            <div class="text-xs text-cocoa uppercase tracking-wider font-semibold">Casas / marcas</div>
+          </div>
+          <div>
+            <div class="font-chunky text-4xl text-amber"><span data-counter="100">0</span>%</div>
+            <div class="text-xs text-cocoa uppercase tracking-wider font-semibold">Recetas familiares</div>
+          </div>
+          <div>
+            <div class="font-chunky text-4xl text-blue">∞</div>
+            <div class="text-xs text-cocoa uppercase tracking-wider font-semibold">Espacio en la mesa</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento collage with stagger animation -->
+      <div class="lg:col-span-5 relative">
+        <div class="grid grid-cols-6 grid-rows-6 gap-3 h-[560px] bento-mobile">
+          <div data-bento="1" class="col-span-4 row-span-4 bg-red rounded-3xl overflow-hidden wobble relative bento-item">
+            <span class="tape"></span>
+            <img src="../assets/imagenes/postres/p001_img02_761x760.jpeg" alt="Cookie Monster" class="w-full h-full object-cover" />
+          </div>
+          <div data-bento="2" class="col-span-2 row-span-2 bg-amber rounded-2xl wobble grid place-items-center p-3 bento-item">
+            <span class="font-chunky text-2xl text-ink leading-none text-center">Recién<br/>horneado</span>
+          </div>
+          <div data-bento="3" class="col-span-2 row-span-2 bg-blue rounded-2xl overflow-hidden wobble bento-item">
+            <img src="../assets/imagenes/postres/p001_img03_761x760.jpeg" alt="Red Velvet" class="w-full h-full object-cover" />
+          </div>
+          <div data-bento="4" class="col-span-3 row-span-2 bg-bone rounded-2xl wobble overflow-hidden bento-item">
+            <img src="../assets/imagenes/postres/p001_img04_766x765.jpeg" alt="Zanahoria" class="w-full h-full object-cover" />
+          </div>
+          <div data-bento="5" class="col-span-3 row-span-2 bg-cocoa rounded-2xl wobble grid place-items-center text-cream p-4 bento-item">
+            <div class="text-center">
+              <div class="font-chunky text-3xl leading-none">$2.50</div>
+              <div class="text-xs uppercase tracking-wider mt-1">/ galleta</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOS PERSONAJES (Abuela vs Lobo) -->
+<section id="personajes" class="bg-ink text-cream py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute top-10 left-10 font-chunky text-cream/5 text-[18rem] leading-none select-none" data-bg-text>A&amp;L</div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
+    <div class="text-center mb-16">
+      <span class="inline-block bg-amber text-ink px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase" data-section-tag>Los personajes</span>
+      <h2 class="font-chunky text-5xl lg:text-7xl mt-5 leading-tight" data-section-title>
+        Dos almas.<br/>
+        <span class="text-amber">Una</span> <span class="text-red">cocina.</span>
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- LA ABUELA -->
+      <div class="char-card bg-amber text-ink p-10 lg:p-14 rounded-[2.5rem] relative overflow-hidden" data-char="abuela">
+        <div class="absolute top-4 right-4 lg:top-6 lg:right-6 text-5xl lg:text-7xl opacity-20">👵</div>
+        <div class="font-chunky text-sm tracking-[.3em] uppercase">Carácter Nº 01</div>
+        <h3 class="font-chunky text-5xl lg:text-7xl mt-3">La Abuela</h3>
+        <p class="font-serif-c italic text-2xl mt-3 text-ink/70">El origen, el alma, el sabor del hogar.</p>
+        <div class="mt-8 space-y-4 text-base leading-relaxed">
+          <p>Símbolo de sabiduría, amor incondicional y cocina con historia. Encarna lo artesanal, lo hecho a mano, lo que se transmite de generación en generación sin perder la esencia.</p>
+          <p>Cada receta nace de su libro imaginario: tiempo, ingredientes simples y mucho corazón.</p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Tradición</span>
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Cuidado</span>
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Memoria</span>
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Hogar</span>
+        </div>
+      </div>
+
+      <!-- EL LOBO -->
+      <div class="char-card bg-red text-cream p-10 lg:p-14 rounded-[2.5rem] relative overflow-hidden" data-char="lobo">
+        <div class="absolute top-4 right-4 lg:top-6 lg:right-6 text-5xl lg:text-7xl opacity-20">🐺</div>
+        <div class="font-chunky text-sm tracking-[.3em] uppercase text-amber">Carácter Nº 02</div>
+        <h3 class="font-chunky text-5xl lg:text-7xl mt-3">El Lobo</h3>
+        <p class="font-serif-c italic text-2xl mt-3 text-cream/80">El instinto, el carácter, la mordida.</p>
+        <div class="mt-8 space-y-4 text-base leading-relaxed">
+          <p>No seguimos tendencias: seguimos el instinto y la memoria del paladar. El lobo es lo que nos lleva a hacer las cosas como hay que hacerlas, sin pedir permiso a la moda.</p>
+          <p>Es energía, audacia, un poco de salvajismo en cada receta. La fuerza detrás del oficio.</p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Carácter</span>
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Instinto</span>
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Honestidad</span>
+          <span class="bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">Audacia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORIZONTAL SCROLL — PRODUCTOS BENTO -->
+<section id="productos" class="py-24 lg:py-32 bg-cream relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 mb-12">
+    <div class="flex items-end justify-between flex-wrap gap-6">
+      <div>
+        <span class="inline-block bg-red text-cream px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase stamp" data-section-tag>🍪 Galletas</span>
+        <h2 class="font-chunky text-5xl lg:text-7xl mt-4 leading-none" data-section-title>
+          Cuatro sabores.<br/>
+          Una <span class="text-red">obsesión</span>.
+        </h2>
+      </div>
+      <p class="text-cocoa max-w-sm">Cada galleta es 85g de carácter. Caja familiar (6 und) por <strong class="text-red">$13.50</strong> — el plan más popular.</p>
+    </div>
+  </div>
+
+  <div id="h-pin-c" class="relative">
+    <div id="h-track-c" class="flex gap-5 px-6 lg:px-10 will-change-transform">
+      <!-- Cookie Monster -->
+      <article class="bg-blue rounded-[2rem] p-5 wobble w-[340px] shrink-0">
+        <div class="aspect-square bg-cream rounded-[1.5rem] overflow-hidden mb-4">
+          <img src="../assets/imagenes/postres/p001_img02_761x760.jpeg" alt="Cookie Monster" class="w-full h-full object-cover" />
+        </div>
+        <div class="text-cream">
+          <div class="text-xs font-bold uppercase tracking-wider opacity-80">N° 01 · La juguetona</div>
+          <h3 class="font-chunky text-2xl mt-1">Cookie Monster</h3>
+          <p class="text-sm mt-2 opacity-90 leading-snug">Azul vibrante, ojos de chocolate, relleno 100% Nutella.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="font-chunky text-2xl">$2.50</div>
+            <button class="magnetic bg-cream text-ink rounded-full font-bold text-xs px-4 py-2.5 min-h-[44px] hover:bg-amber transition">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+      <article class="bg-red rounded-[2rem] p-5 wobble w-[340px] shrink-0">
+        <div class="aspect-square bg-cream rounded-[1.5rem] overflow-hidden mb-4">
+          <img src="../assets/imagenes/postres/p001_img03_761x760.jpeg" alt="Red Velvet" class="w-full h-full object-cover" />
+        </div>
+        <div class="text-cream">
+          <div class="text-xs font-bold uppercase tracking-wider opacity-80">N° 02 · La vistosa</div>
+          <h3 class="font-chunky text-2xl mt-1">Red Velvet</h3>
+          <p class="text-sm mt-2 opacity-90 leading-snug">Miga aterciopelada y frosting de queso crema. Filigranas de chocolate.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="font-chunky text-2xl">$2.50</div>
+            <button class="magnetic bg-cream text-ink rounded-full font-bold text-xs px-4 py-2.5 min-h-[44px] hover:bg-amber transition">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+      <article class="bg-amber rounded-[2rem] p-5 wobble w-[340px] shrink-0">
+        <div class="aspect-square bg-cream rounded-[1.5rem] overflow-hidden mb-4">
+          <img src="../assets/imagenes/postres/p001_img04_766x765.jpeg" alt="Zanahoria" class="w-full h-full object-cover" />
+        </div>
+        <div class="text-ink">
+          <div class="text-xs font-bold uppercase tracking-wider opacity-80">N° 03 · La balanceada</div>
+          <h3 class="font-chunky text-2xl mt-1">Zanahoria</h3>
+          <p class="text-sm mt-2 opacity-90 leading-snug">Inspirada en carrot cake. Avena, nueces tostadas, frosting de queso.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="font-chunky text-2xl">$2.50</div>
+            <button class="magnetic bg-ink text-cream rounded-full font-bold text-xs px-4 py-2.5 min-h-[44px] hover:bg-red transition">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+      <article class="bg-cocoa rounded-[2rem] p-5 wobble w-[340px] shrink-0">
+        <div class="aspect-square bg-cream rounded-[1.5rem] overflow-hidden mb-4">
+          <img src="../assets/imagenes/postres/p001_img05_761x760.jpeg" alt="Clásica" class="w-full h-full object-cover" />
+        </div>
+        <div class="text-cream">
+          <div class="text-xs font-bold uppercase tracking-wider opacity-80">N° 04 · La eterna</div>
+          <h3 class="font-chunky text-2xl mt-1">Clásica</h3>
+          <p class="text-sm mt-2 opacity-90 leading-snug">Mantequillosa, dorada, chispas de chocolate negro. Un clásico que nunca falla.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="font-chunky text-2xl">$2.50</div>
+            <button class="magnetic bg-cream text-ink rounded-full font-bold text-xs px-4 py-2.5 min-h-[44px] hover:bg-amber transition">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+      <!-- Pricing card horizontal -->
+      <article class="bg-bone border-2 border-ink rounded-[2rem] p-7 w-[340px] shrink-0">
+        <div class="text-xs font-bold uppercase tracking-wider text-cocoa">— Packs —</div>
+        <h3 class="font-chunky text-3xl mt-2 leading-tight">¿Para cuántos?</h3>
+        <div class="mt-5 space-y-3 text-sm">
+          <div class="flex justify-between items-baseline border-b border-ink/15 pb-2">
+            <div>
+              <div class="font-chunky text-lg">1 unidad</div>
+              <div class="text-xs text-cocoa">cualquier sabor</div>
+            </div>
+            <span class="font-chunky text-2xl text-red">$2.50</span>
+          </div>
+          <div class="flex justify-between items-baseline border-b border-ink/15 pb-2">
+            <div>
+              <div class="font-chunky text-lg">Pareja · 4</div>
+              <div class="text-xs text-cocoa">$2.35 c/u</div>
+            </div>
+            <span class="font-chunky text-2xl text-red">$9.40</span>
+          </div>
+          <div class="flex justify-between items-baseline bg-red text-cream -mx-3 px-3 py-2 rounded-lg">
+            <div>
+              <div class="font-chunky text-lg">Familiar · 6 ⭐</div>
+              <div class="text-xs opacity-80">$2.25 c/u · la más popular</div>
+            </div>
+            <span class="font-chunky text-2xl">$13.50</span>
+          </div>
+        </div>
+      </article>
+      <!-- CTA card -->
+      <article class="bg-ink text-cream rounded-[2rem] p-7 w-[340px] shrink-0 grid place-items-center">
+        <div class="text-center">
+          <div class="text-5xl mb-3">🐺</div>
+          <h3 class="font-chunky text-3xl">¿Listo para morder?</h3>
+          <p class="text-sm mt-3 text-cream/70">Tu caja ideal a un mensaje de distancia.</p>
+          <a href="#contacto" class="magnetic mt-5 inline-flex items-center gap-2 bg-amber text-ink font-bold px-6 py-3 rounded-full hover:bg-red hover:text-cream transition">
+            Pedir ya 🍪
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- POSTRES BANNER -->
+<section class="bg-bone py-24 grain relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="inline-block bg-ink text-cream px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase" data-section-tag>🍰 Postres caseros</span>
+      <h2 class="font-chunky text-5xl lg:text-6xl mt-5 leading-tight" data-section-title>
+        Para celebrar<br/>
+        a lo <span class="text-red">grande</span>.
+      </h2>
+      <p class="text-cocoa mt-6 text-lg leading-relaxed">Pasteles de 8 a 12 porciones. Hechos para fiestas, oficinas, o porque sí. <strong class="text-ink">$25 cada uno.</strong></p>
+      <a href="#contacto" class="magnetic mt-8 inline-flex items-center gap-2 bg-ink text-cream font-bold px-7 py-4 rounded-full hover:bg-red transition">
+        Encarga uno 🍰
+      </a>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-cream rounded-3xl overflow-hidden wobble bento-item" data-postre>
+        <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake" class="w-full h-72 object-cover" />
+        <div class="p-4">
+          <div class="font-chunky text-xl">Cheesecake NY</div>
+          <div class="text-xs text-cocoa">Textura compacta · frutos rojos</div>
+        </div>
+      </div>
+      <div class="bg-cream rounded-3xl overflow-hidden wobble mt-8 bento-item" data-postre>
+        <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada chocolate" class="w-full h-72 object-cover" />
+        <div class="p-4">
+          <div class="font-chunky text-xl">Mojada chocolate</div>
+          <div class="text-xs text-cocoa">Cacao 65% · fudge centro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAS MARCAS -->
+<section id="marcas" class="py-24 lg:py-32 bg-cream">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-16">
+      <span class="inline-block bg-amber text-ink px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase" data-section-tag>Las 5 marcas</span>
+      <h2 class="font-chunky text-5xl lg:text-7xl mt-4 leading-tight" data-section-title>
+        Una <span class="text-red">familia</span><br/>
+        de marcas con alma.
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <a href="#" class="sticker bg-amber rounded-3xl p-6" data-marca>
+        <div class="font-chunky text-4xl text-ink">Grön</div>
+        <div class="text-xs font-bold uppercase tracking-wider mt-2 text-ink/60">🍞 Panadería</div>
+        <p class="text-sm mt-4 text-ink/80">Un arte del grano en tu paladar.</p>
+      </a>
+      <a href="#" class="sticker bg-red rounded-3xl p-6 text-cream" data-marca>
+        <div class="font-chunky text-4xl">Kúa</div>
+        <div class="text-xs font-bold uppercase tracking-wider mt-2 text-cream/70">🥩 Cárnicos</div>
+        <p class="text-sm mt-4 text-cream/90">Cortes marinados con recetas únicas.</p>
+      </a>
+      <a href="#" class="sticker bg-blue rounded-3xl p-6 text-cream" data-marca>
+        <div class="font-chunky text-4xl">Morifruti</div>
+        <div class="text-xs font-bold uppercase tracking-wider mt-2 text-cream/70">🍯 Mermeladas</div>
+        <p class="text-sm mt-4 text-cream/90">Conservas naturales con frutos reales.</p>
+      </a>
+      <a href="#" class="sticker bg-cocoa rounded-3xl p-6 text-cream" data-marca>
+        <div class="font-chunky text-4xl">Piñaji</div>
+        <div class="text-xs font-bold uppercase tracking-wider mt-2 text-cream/70">🥒 Encurtidos</div>
+        <p class="text-sm mt-4 text-cream/90">Conservas artesanales con sabor auténtico.</p>
+      </a>
+      <a href="#" class="sticker bg-slate rounded-3xl p-6 text-cream" data-marca>
+        <div class="font-chunky text-4xl">Del Bosque</div>
+        <div class="text-xs font-bold uppercase tracking-wider mt-2 text-cream/70">💧 Bebidas</div>
+        <p class="text-sm mt-4 text-cream/90">Agua pura embotellada.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA QUOTE -->
+<section id="historia" class="py-24 lg:py-32 bg-red text-cream relative overflow-hidden grain">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10 text-center">
+    <div class="text-6xl mb-6" data-quote-elem>🐺👵</div>
+    <p class="font-serif-c italic text-3xl lg:text-5xl leading-[1.25]" id="typewriter-c">
+    </p>
+    <div class="mt-10 text-sm font-bold tracking-[.3em] uppercase text-amber" data-quote-elem>El manifiesto de la casa</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contacto" class="py-24 lg:py-28 bg-cream">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+    <div class="bg-ink text-cream rounded-[3rem] p-10 lg:p-16 text-center relative overflow-hidden grain" data-cta>
+      <div class="absolute top-6 right-6 font-chunky text-cream/10 text-9xl">🐺</div>
+      <div class="absolute bottom-6 left-6 font-chunky text-cream/10 text-9xl">👵</div>
+      <h2 class="font-chunky text-5xl lg:text-7xl leading-none relative">
+        ¿Listo para<br/>
+        <span class="text-amber">morder</span>?
+      </h2>
+      <p class="text-cream/80 mt-6 max-w-xl mx-auto text-lg">Escríbenos por WhatsApp y arma tu pedido en 2 minutos.</p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-amber text-ink font-bold px-8 py-5 rounded-full text-lg hover:bg-red hover:text-cream transition">
+          <span class="text-xl">📱</span> WhatsApp · 099 744 8167
+        </a>
+        <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 bg-cream/10 text-cream font-bold px-8 py-5 rounded-full text-lg hover:bg-cream hover:text-ink transition border border-cream/20">
+          ✉ Escríbenos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-cream pt-16 pb-8 border-t-2 border-ink">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid md:grid-cols-12 gap-10 mb-10">
+      <div class="md:col-span-5">
+        <div class="flex items-center gap-2.5">
+          <div class="relative">
+            <div class="w-12 h-12 rounded-full bg-red grid place-items-center text-cream text-2xl">🐺</div>
+            <div class="absolute -bottom-1 -right-2 w-8 h-8 rounded-full bg-amber grid place-items-center text-lg border-2 border-cream">👵</div>
+          </div>
+          <div class="font-chunky text-2xl leading-none">Abuela <span class="text-red">&amp;</span> Lobo</div>
+        </div>
+        <p class="mt-5 text-cocoa max-w-md leading-relaxed">Productos artesanales hechos con ingredientes reales, recetas familiares, y mucho carácter. Desde Ecuador, para tu mesa.</p>
+      </div>
+      <div class="md:col-span-3">
+        <h4 class="font-chunky text-lg mb-3">Marcas</h4>
+        <ul class="space-y-2 text-sm text-cocoa">
+          <li><a class="hover:text-red" href="#">Grön — Panadería</a></li>
+          <li><a class="hover:text-red" href="#">Kúa — Cárnicos</a></li>
+          <li><a class="hover:text-red" href="#">Morifruti — Mermeladas</a></li>
+          <li><a class="hover:text-red" href="#">Piñaji — Encurtidos</a></li>
+          <li><a class="hover:text-red" href="#">Del Bosque — Agua</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-4">
+        <h4 class="font-chunky text-lg mb-3">Contacto</h4>
+        <ul class="space-y-2 text-sm text-cocoa">
+          <li>📞 099 744 8167</li>
+          <li>📧 contacto@comdelbosque.com</li>
+          <li>🌐 www.comdelbosque.com</li>
+        </ul>
+        <div class="mt-4 flex gap-3">
+          <a class="w-10 h-10 grid place-items-center bg-ink text-cream rounded-full hover:bg-red transition magnetic" href="#">📷</a>
+          <a class="w-10 h-10 grid place-items-center bg-ink text-cream rounded-full hover:bg-red transition magnetic" href="#">📘</a>
+          <a class="w-10 h-10 grid place-items-center bg-ink text-cream rounded-full hover:bg-red transition magnetic" href="#">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-cocoa/20 pt-6 flex flex-wrap justify-between items-center gap-3 text-xs text-cocoa">
+      <span>© 2026 D' La Abuela y el Lobo · Hecho en Ecuador</span>
+      <span class="font-chunky">Sin tendencias. Solo memoria del paladar. 🐺</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============ LENIS (defensive) ============
+  let lenis = null;
+  try {
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({ duration: 1.0, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+  } catch (e) { console.warn('Lenis failed, falling back to native scroll', e); }
+
+  gsap.registerPlugin(ScrollTrigger);
+  if (lenis) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // ============ PROGRESS ============
+  const progress = document.getElementById('progress');
+  ScrollTrigger.create({ trigger:'body', start:'top top', end:'bottom bottom', onUpdate: s => progress.style.width = (s.progress*100)+'%' });
+
+  // ============ CURSOR (with personality) ============
+  const cursor = document.getElementById('cursor');
+  let mx=0, my=0, cx=0, cy=0;
+  window.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function loop(){
+    cx += (mx-cx)*0.22; cy += (my-cy)*0.22;
+    cursor.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button, .magnetic, .sticker').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+  });
+  // Cursor changes color on dark sections
+  ScrollTrigger.create({ trigger: '#personajes', start:'top 50%', end:'bottom 50%',
+    onEnter: () => cursor.classList.add('cocoa'),
+    onLeave: () => cursor.classList.remove('cocoa'),
+    onEnterBack: () => cursor.classList.add('cocoa'),
+    onLeaveBack: () => cursor.classList.remove('cocoa'),
+  });
+
+  // ============ MAGNETIC (elastic bounce) ============
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      gsap.to(btn, { x: x*0.3, y: y*0.3, duration: 0.4, ease: 'power2.out' });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x:0, y:0, duration: 0.8, ease: 'elastic.out(1.2, 0.3)' });
+    });
+  });
+
+  // ============ HERO REVEAL (chunky bounce) ============
+  document.querySelectorAll('[data-split-c]').forEach(el => {
+    const text = el.textContent;
+    el.textContent = '';
+    [...text].forEach(ch => {
+      const span = document.createElement('span');
+      span.textContent = ch === ' ' ? ' ' : ch;
+      span.className = 'split-char';
+      el.appendChild(span);
+    });
+  });
+
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.from('[data-nav-anim]', { opacity:0, y:-12, duration:0.7, stagger:0.08, ease:'power3.out' })
+    .to('.split-char', { opacity:1, y:0, rotate:0, scale:1, duration:0.8, stagger:0.03, ease:'back.out(1.7)' }, '-=0.5')
+    .from('[data-hero-elem]', { opacity:0, y:30, duration:0.7, stagger:0.12, ease:'back.out(1.3)' }, '-=0.6')
+    .from('[data-bento]', {
+      opacity:0,
+      scale: 0.5,
+      rotation: () => gsap.utils.random(-15, 15),
+      duration: 0.9,
+      stagger: 0.1,
+      ease: 'back.out(1.6)'
+    }, '-=0.8');
+
+  // Bento parallax
+  document.querySelectorAll('[data-bento]').forEach((el, i) => {
+    gsap.to(el, {
+      y: (i % 2 === 0) ? -40 : -25,
+      rotation: (i % 2 === 0) ? -2 : 2,
+      scrollTrigger: { trigger: el, start:'top bottom', end:'bottom top', scrub: 1 }
+    });
+  });
+
+  // Blobs floating
+  gsap.to('[data-blob="1"]', { y: -80, rotation: 30, scrollTrigger:{ trigger:'body', start:'top top', end:'+=1500', scrub:1 } });
+  gsap.to('[data-blob="2"]', { y: -50, rotation: -20, scrollTrigger:{ trigger:'body', start:'top top', end:'+=1500', scrub:1 } });
+
+  // Counter
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.dataset.counter);
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%', once: true,
+      onEnter: () => {
+        gsap.to({ v:0 }, { v: target, duration: 1.6, ease: 'power2.out', onUpdate: function(){ el.textContent = Math.round(this.targets()[0].v); } });
+      }
+    });
+  });
+
+  // ============ CHARACTERS — slide in from sides ============
+  gsap.from('[data-char="abuela"]', {
+    opacity:0, x:-100, rotation:-6, duration:1.2, ease:'back.out(1.5)',
+    scrollTrigger: { trigger: '[data-char="abuela"]', start: 'top 75%' }
+  });
+  gsap.from('[data-char="lobo"]', {
+    opacity:0, x:100, rotation:6, duration:1.2, ease:'back.out(1.5)',
+    scrollTrigger: { trigger: '[data-char="lobo"]', start: 'top 75%' }
+  });
+  // Background big A&L text parallax
+  gsap.to('[data-bg-text]', {
+    x: 200, rotation: -8,
+    scrollTrigger: { trigger:'#personajes', start:'top bottom', end:'bottom top', scrub:1 }
+  });
+
+  // ============ HORIZONTAL SCROLL CARDS (desktop only) ============
+  ScrollTrigger.matchMedia({
+    "(min-width: 1024px)": function() {
+      const trackC = document.getElementById('h-track-c');
+      if (trackC) {
+        const total = trackC.scrollWidth - window.innerWidth + 80;
+        gsap.to(trackC, {
+          x: -total, ease:'none',
+          scrollTrigger: { trigger:'#h-pin-c', pin:true, start:'top 100px', end: () => '+='+total, scrub: 1, invalidateOnRefresh: true }
+        });
+        trackC.querySelectorAll('article').forEach((card, i) => {
+          gsap.fromTo(card,
+            { rotation: i % 2 === 0 ? -3 : 3 },
+            { rotation: 0, scrollTrigger:{ trigger:'#h-pin-c', start:'top 80%', end:'top 30%', scrub:1 } }
+          );
+        });
+      }
+    },
+    "(max-width: 1023px)": function() {
+      const pin = document.getElementById('h-pin-c');
+      if (pin) pin.style.overflowX = 'auto';
+    }
+  });
+
+  // ============ SECTION TAGS & TITLES (bouncy) ============
+  gsap.utils.toArray('[data-section-tag]').forEach(el => {
+    gsap.from(el, { opacity:0, y:20, scale:0.7, duration:0.8, ease:'back.out(2)',
+      scrollTrigger: { trigger:el, start:'top 85%' } });
+  });
+  gsap.utils.toArray('[data-section-title]').forEach(el => {
+    gsap.from(el, { opacity:0, y:35, duration:0.9, ease:'back.out(1.4)',
+      scrollTrigger: { trigger:el, start:'top 80%' } });
+  });
+
+  // Postres bento
+  gsap.from('[data-postre]', {
+    opacity:0, scale:0.6, rotation:-5, duration:0.9, stagger:0.18, ease:'back.out(1.5)',
+    scrollTrigger: { trigger:'[data-postre]', start:'top 75%' }
+  });
+
+  // Marcas stickers — drop in with rotation
+  gsap.from('[data-marca]', {
+    opacity:0, y:50, rotation: () => gsap.utils.random(-10, 10), duration:0.9, stagger:0.1, ease:'back.out(1.7)',
+    scrollTrigger: { trigger:'#marcas', start:'top 70%' }
+  });
+
+  // ============ TYPEWRITER (manifesto) ============
+  const tw = document.getElementById('typewriter-c');
+  const twText = '"De la Abuela y el Lobo no es solo una marca. Es una mesa que siempre tiene espacio para uno más."';
+  ScrollTrigger.create({
+    trigger: tw, start:'top 70%', once:true,
+    onEnter: () => {
+      let i = 0;
+      const iv = setInterval(() => {
+        tw.textContent = twText.slice(0, i++);
+        if (i > twText.length) clearInterval(iv);
+      }, 28);
+    }
+  });
+  gsap.from('[data-quote-elem]', {
+    opacity:0, y:20, duration:0.8, stagger:0.2, ease:'back.out(1.5)',
+    scrollTrigger: { trigger:'#historia', start:'top 60%' }
+  });
+
+  // CTA
+  gsap.from('[data-cta]', {
+    opacity:0, y:50, scale:0.9, duration:1, ease:'back.out(1.4)',
+    scrollTrigger: { trigger:'[data-cta]', start:'top 80%' }
+  });
+
+  // ============ MOBILE MENU ============
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function openMenu() { mobileMenu.classList.add('open'); if (lenis) lenis.stop(); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('open'); if (lenis) lenis.start(); document.body.style.overflow = ''; }
+  if (menuToggle) menuToggle.addEventListener('click', openMenu);
+  if (menuClose) menuClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('[data-menu-link]').forEach(l => l.addEventListener('click', closeMenu));
+
+  // ============ LAZY LOAD ============
+  document.querySelectorAll('img').forEach((img, i) => { if (i > 2) img.loading = 'lazy'; });
+</script>
+</body>
+</html>

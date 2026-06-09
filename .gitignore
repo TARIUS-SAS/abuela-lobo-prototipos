@@ -1,0 +1,16 @@
+# Backups antiguos (versiones v1 antes del rediseño)
+**/_v1-backup/
+
+# Renders de páginas del PDF (solo para referencia interna)
+**/_paginas/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~

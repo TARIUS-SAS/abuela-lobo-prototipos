@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>D' La Abuela y el Lobo — El cuaderno de recetas</title>
+<meta name="description" content="Volumen I del cuaderno de la abuela. Productos artesanales hechos con ingredientes reales y recetas familiares." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper:    '#F4E8D2',
+        'paper-2':'#EDD9B3',
+        'paper-3':'#E2C896',
+        ink:      '#2A1F15',
+        'ink-2':  '#4F3A28',
+        muted:    '#8B6F4E',
+        red:      '#B92214',
+        'red-2':  '#8A1A0F',
+        gold:     '#A4823A',
+        coffee:   '#6B4423',
+        cream:    '#FBF5E8',
+      },
+      fontFamily: {
+        hand:    ['Caveat', 'cursive'],
+        serif:   ['"EB Garamond"', 'Georgia', 'serif'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        type:    ['"Special Elite"', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+<style>
+  html, body { margin:0; padding:0; }
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background: #F4E8D2;
+    color: #2A1F15;
+    overflow-x: hidden;
+  }
+  /* Paper texture base layer */
+  .paper-bg {
+    background-color: #F4E8D2;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(107, 68, 35, 0.06), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(107, 68, 35, 0.08), transparent 50%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.27 0 0 0 0 0.13 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .paper-deep {
+    background-color: #EDD9B3;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.27 0 0 0 0 0.13 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Coffee stain */
+  .stain::before {
+    content:""; position:absolute; pointer-events:none;
+    width:300px; height:300px; border-radius:50%;
+    background: radial-gradient(circle, rgba(107,68,35,0.13) 0%, rgba(107,68,35,0.06) 40%, transparent 70%);
+    filter: blur(8px);
+  }
+  /* Polaroid frame */
+  .polaroid {
+    background:#FBF5E8;
+    padding:12px 12px 60px;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,.04),
+      0 6px 14px -4px rgba(42,31,21,.18),
+      0 22px 40px -16px rgba(42,31,21,.22);
+  }
+  .polaroid img { display:block; width:100%; height:auto; filter: contrast(0.95) saturate(0.92) sepia(0.06); }
+  .tape {
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:90px; height:24px;
+    background:rgba(223,168,76,0.65);
+    box-shadow:0 2px 4px rgba(0,0,0,.08);
+    mix-blend-mode: multiply;
+  }
+  .tape::before, .tape::after {
+    content:""; position:absolute; top:0; bottom:0; width:6px;
+    background-image: linear-gradient(45deg, transparent 30%, rgba(0,0,0,.05) 30%, rgba(0,0,0,.05) 70%, transparent 70%);
+    background-size: 6px 6px;
+  }
+  .tape::before { left:0; }
+  .tape::after { right:0; }
+  /* Stamp */
+  .stamp {
+    background:#FBF5E8;
+    padding:8px;
+    --m: radial-gradient(circle at 1px 1px, transparent 1.5px, #000 2px) 0 0 / 8px 8px;
+    -webkit-mask: var(--m); mask: var(--m);
+    box-shadow: 0 0 0 1px rgba(42,31,21,.2);
+  }
+  /* Recipe card */
+  .recipe-card {
+    background:
+      linear-gradient(transparent 95%, rgba(75, 146, 222, .25) 95%),
+      #FBF5E8;
+    background-size: 100% 28px;
+    background-position: 0 4px;
+    border: 1px solid rgba(42,31,21,.12);
+    box-shadow:
+      0 1px 0 rgba(75,146,222,.4) inset,
+      0 14px 30px -16px rgba(42,31,21,.25);
+  }
+  /* Hand-drawn underline */
+  .hand-underline {
+    position:relative;
+    display:inline-block;
+  }
+  .hand-underline::after {
+    content:"";
+    position:absolute;
+    left:-4px; right:-4px; bottom:-6px;
+    height:14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14'%3E%3Cpath d='M2,8 Q40,2 80,7 T160,7 Q180,9 198,5' stroke='%23B92214' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    opacity:.92;
+  }
+  /* Doodle arrow */
+  .doodle-arrow {
+    fill:none;
+    stroke:#2A1F15;
+    stroke-width:2.2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  /* Smooth scroll body */
+  html.lenis { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  /* Progress bar */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, #B92214, #A4823A);
+    z-index: 100; transition: width .08s linear;
+  }
+  /* Custom cursor */
+  #cursor {
+    position: fixed; top:0; left:0; width:14px; height:14px; border-radius:50%;
+    background:#B92214; pointer-events:none; z-index:1000; mix-blend-mode: multiply;
+    transition: transform .15s ease-out, opacity .2s, width .2s, height .2s;
+    transform: translate(-50%,-50%);
+  }
+  #cursor.large { width:42px; height:42px; background:rgba(185,34,20,.4); }
+  @media (max-width: 1024px) { #cursor { display:none; } }
+  /* Magnetic */
+  .magnetic { display:inline-block; will-change: transform; }
+  /* 3D card */
+  .card-3d { transform-style: preserve-3d; perspective: 1200px; }
+  /* Marquee */
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .marquee-track { animation: marquee 35s linear infinite; }
+  /* Typewriter cursor */
+  .type-cursor::after { content:"_"; margin-left:4px; opacity:1; animation: blink 1s steps(2) infinite; color:#B92214; }
+  @keyframes blink { 50% { opacity: 0; } }
+  /* Wax seal */
+  .wax-seal {
+    width:90px; height:90px; border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #C73428, #8A1A0F 70%, #5e120a 100%);
+    box-shadow: 0 4px 10px rgba(0,0,0,.25), inset 0 -8px 12px rgba(0,0,0,.3), inset 0 4px 6px rgba(255,255,255,.15);
+    display:grid; place-items:center;
+    color:#FBF5E8; font-family:'Caveat', cursive; font-size:18px; font-weight:700;
+    transform: rotate(-12deg);
+  }
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(28px); }
+  /* Sticky storytelling beats */
+  .beat { opacity:.25; transition: opacity .4s; }
+  .beat.is-active { opacity: 1; }
+  /* Page edge */
+  .page-edge {
+    position:absolute; bottom:0; left:0; right:0; height:24px;
+    background:
+      linear-gradient(180deg, transparent, rgba(107,68,35,.18));
+    pointer-events:none;
+  }
+  /* Sub-brand stamp */
+  .post-stamp {
+    background:#FBF5E8;
+    padding:14px;
+    --m: radial-gradient(circle at 1px 1px, transparent 1.5px, #000 2px) 0 0 / 10px 10px;
+    -webkit-mask: var(--m); mask: var(--m);
+    box-shadow: 0 6px 14px rgba(42,31,21,.18);
+    position: relative;
+  }
+  .post-stamp::after {
+    content:""; position:absolute; top:14px; right:14px; bottom:14px; left:14px;
+    border: 1.5px dashed rgba(42,31,21,.25);
+    pointer-events: none;
+  }
+  ::selection { background:#B92214; color:#FBF5E8; }
+  /* Smooth reveal of text */
+  .split-text span { display:inline-block; opacity:0; transform: translateY(40px) rotate(2deg); }
+  /* Disable magnetic on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .magnetic { transform: none !important; }
+    #cursor { display: none !important; }
+  }
+  /* Mobile menu */
+  #mobile-menu {
+    position: fixed; inset: 0; z-index: 60;
+    background: #F4E8D2;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.27 0 0 0 0 0.13 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    transform: translateX(100%);
+    transition: transform .45s cubic-bezier(.83, 0, .17, 1);
+    overflow-y: auto;
+  }
+  #mobile-menu.open { transform: translateX(0); }
+  /* Mobile-only hero polaroid layout */
+  @media (max-width: 1023px) {
+    .polaroid-mobile-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; height: auto !important; }
+    .polaroid-mobile-stack > [data-polaroid] {
+      position: relative !important; inset: auto !important;
+      top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+      width: 100% !important; transform: none !important;
+    }
+    .polaroid-mobile-stack > [data-polaroid="1"] { grid-column: 1 / -1; }
+    .polaroid-mobile-stack .wax-seal { display: none; }
+  }
+</style>
+</head>
+<body class="paper-bg antialiased">
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<!-- NAV -->
+<header class="fixed top-0 left-0 right-0 z-40 px-3 lg:px-10 pt-3 lg:pt-4">
+  <div class="max-w-[88rem] mx-auto bg-cream/90 backdrop-blur-md border border-ink/10 rounded-full px-4 lg:px-5 py-2.5 lg:py-3 flex items-center justify-between shadow-sm">
+    <a href="#" class="flex items-center gap-2.5">
+      <span class="font-hand text-2xl lg:text-3xl text-red leading-none">A&amp;L</span>
+      <span class="font-serif text-sm tracking-wide hidden md:inline">D' La Abuela y el Lobo</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm">
+      <a class="hover:text-red transition" href="#capitulo-1">Cap. 1 · Historia</a>
+      <a class="hover:text-red transition" href="#galletas">Cap. 2 · Galletas</a>
+      <a class="hover:text-red transition" href="#postres">Cap. 3 · Postres</a>
+      <a class="hover:text-red transition" href="#marcas">Cap. 4 · Marcas</a>
+      <a class="hover:text-red transition" href="#contacto">Cap. 5 · Pedidos</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="#contacto" class="magnetic hidden sm:inline-flex items-center gap-2 bg-ink text-cream font-serif italic text-sm px-4 lg:px-5 py-2 rounded-full hover:bg-red transition">
+        Hacer pedido <span class="hidden lg:inline">→</span>
+      </a>
+      <button id="menu-toggle" class="lg:hidden w-11 h-11 grid place-items-center bg-ink text-cream rounded-full" aria-label="Abrir menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="lg:hidden">
+  <div class="flex justify-end p-5">
+    <button id="menu-close" class="w-12 h-12 grid place-items-center bg-ink text-cream rounded-full" aria-label="Cerrar menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav class="px-8 pb-12 flex flex-col gap-1">
+    <a class="font-display text-4xl text-ink hover:text-red transition py-3 border-b border-ink/10" href="#capitulo-1" data-menu-link>
+      <span class="font-type text-xs uppercase tracking-wider text-muted block mb-1">Cap. 1</span>
+      Historia
+    </a>
+    <a class="font-display text-4xl text-ink hover:text-red transition py-3 border-b border-ink/10" href="#galletas" data-menu-link>
+      <span class="font-type text-xs uppercase tracking-wider text-muted block mb-1">Cap. 2</span>
+      Galletas
+    </a>
+    <a class="font-display text-4xl text-ink hover:text-red transition py-3 border-b border-ink/10" href="#postres" data-menu-link>
+      <span class="font-type text-xs uppercase tracking-wider text-muted block mb-1">Cap. 3</span>
+      Postres
+    </a>
+    <a class="font-display text-4xl text-ink hover:text-red transition py-3 border-b border-ink/10" href="#marcas" data-menu-link>
+      <span class="font-type text-xs uppercase tracking-wider text-muted block mb-1">Cap. 4</span>
+      Marcas
+    </a>
+    <a class="font-display text-4xl text-ink hover:text-red transition py-3 border-b border-ink/10" href="#contacto" data-menu-link>
+      <span class="font-type text-xs uppercase tracking-wider text-muted block mb-1">Cap. 5</span>
+      Pedidos
+    </a>
+    <div class="mt-8 pt-8 border-t border-ink/10 font-hand text-2xl text-red">
+      099 744 8167<br/>
+      <a href="mailto:contacto@comdelbosque.com" class="text-base font-serif italic text-ink-2">contacto@comdelbosque.com</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO / COVER -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-20">
+  <div class="stain" style="top:8%; left:-100px;"></div>
+  <div class="stain" style="bottom:5%; right:-80px; width:380px; height:380px;"></div>
+
+  <div class="max-w-7xl w-full mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 items-center relative z-10">
+    <div class="lg:col-span-7">
+      <div data-hero-tag class="inline-flex items-center gap-3 mb-6">
+        <span class="w-12 h-px bg-ink/40"></span>
+        <span class="font-type text-xs uppercase tracking-[.3em] text-ink-2">Volumen I · Edición 2025</span>
+      </div>
+      <h1 class="font-display font-medium leading-[.92] text-ink">
+        <span data-split class="block text-[clamp(2rem,6.5vw,5.5rem)]">El cuaderno</span>
+        <span data-split class="block text-[clamp(2rem,6.5vw,5.5rem)]">de recetas</span>
+        <span class="block font-hand text-red text-[clamp(2.75rem,9vw,8rem)] leading-[.85] -mt-2 italic">
+          <span data-split>de la abuela</span>
+          <svg class="inline-block w-10 h-10 lg:w-12 lg:h-12 -mt-4 lg:-mt-6 -ml-2" viewBox="0 0 60 60">
+            <path class="doodle-arrow" stroke="#B92214" d="M5,30 Q30,5 55,30" />
+            <path class="doodle-arrow" stroke="#B92214" d="M45,20 L55,30 L45,40" />
+          </svg>
+        </span>
+      </h1>
+      <p data-hero-p class="mt-8 font-serif text-lg lg:text-xl max-w-xl text-ink-2 leading-relaxed">
+        Una colección de sabores caseros, recetas familiares e ingredientes reales — heredada generación tras generación y servida hoy a tu mesa.
+        <em class="text-red">Sin tendencias, solo memoria del paladar.</em>
+      </p>
+      <div data-hero-cta class="mt-10 flex flex-wrap items-center gap-5">
+        <a href="#capitulo-1" class="magnetic inline-flex items-center gap-3 bg-ink text-cream font-serif italic text-lg px-8 py-4 rounded-full hover:bg-red transition group">
+          Abrir el cuaderno
+          <span class="transition group-hover:translate-x-1">→</span>
+        </a>
+        <a href="#galletas" class="font-hand text-2xl text-red hover:underline">o ve directo a las galletas →</a>
+      </div>
+      <div data-hero-tag class="mt-14 flex items-center gap-4 font-type text-xs uppercase tracking-[.2em] text-muted">
+        <svg width="14" height="14" viewBox="0 0 14 14" class="animate-bounce"><path d="M7 0v14M3 10l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        Pasa la página
+      </div>
+    </div>
+
+    <!-- Polaroid stack on right -->
+    <div class="lg:col-span-5 relative h-auto lg:h-[600px] polaroid-mobile-stack">
+      <div data-polaroid="1" class="polaroid absolute top-0 left-4 w-[280px] rotate-[-6deg]">
+        <span class="tape"></span>
+        <img src="../assets/imagenes/catalogo/p001_img02_3380x5070.jpeg" alt="Familia en la mesa" class="h-[320px] object-cover" />
+        <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink-2">la familia · 2024</div>
+      </div>
+      <div data-polaroid="2" class="polaroid absolute top-20 right-0 w-[260px] rotate-[7deg] z-10">
+        <span class="tape" style="background:rgba(185,34,20,0.5);"></span>
+        <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada de chocolate" class="h-[260px] object-cover" />
+        <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-red">favorito de la abuela</div>
+      </div>
+      <div data-polaroid="3" class="polaroid absolute bottom-0 left-10 w-[240px] rotate-[-3deg]">
+        <span class="tape"></span>
+        <img src="../assets/imagenes/postres/p001_img05_761x760.jpeg" alt="Galleta clásica" class="h-[220px] object-cover" />
+        <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-ink-2">receta nº 04</div>
+      </div>
+      <!-- Wax seal -->
+      <div class="absolute bottom-12 right-4 wax-seal">
+        Vol. I
+      </div>
+    </div>
+  </div>
+  <div class="page-edge"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="bg-ink text-cream py-4 overflow-hidden border-y border-cream/10">
+  <div class="marquee-track flex gap-12 whitespace-nowrap font-hand text-3xl">
+    <div class="flex gap-12 items-center">
+      <span>★ Recetas familiares</span><span class="text-gold">·</span>
+      <span>★ Ingredientes reales</span><span class="text-gold">·</span>
+      <span>★ Hecho con tiempo</span><span class="text-gold">·</span>
+      <span>★ Sin tendencias</span><span class="text-gold">·</span>
+      <span>★ Memoria del paladar</span><span class="text-gold">·</span>
+      <span>★ La mesa que siempre tiene espacio</span><span class="text-gold">·</span>
+    </div>
+    <div class="flex gap-12 items-center" aria-hidden="true">
+      <span>★ Recetas familiares</span><span class="text-gold">·</span>
+      <span>★ Ingredientes reales</span><span class="text-gold">·</span>
+      <span>★ Hecho con tiempo</span><span class="text-gold">·</span>
+      <span>★ Sin tendencias</span><span class="text-gold">·</span>
+      <span>★ Memoria del paladar</span><span class="text-gold">·</span>
+      <span>★ La mesa que siempre tiene espacio</span><span class="text-gold">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- CAPÍTULO 1: STICKY STORYTELLING -->
+<section id="capitulo-1" class="relative paper-bg">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 text-center">
+    <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo I —</div>
+    <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+      Una historia que se cuenta <span class="font-hand text-red italic">en cada bocado</span>.
+    </h2>
+  </div>
+
+  <div id="story-pin" class="relative">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-start">
+      <!-- LEFT: pinned image stack -->
+      <div class="lg:sticky lg:top-32 self-start">
+        <div class="relative h-[560px]">
+          <div data-story-img="1" class="polaroid absolute inset-0 transition-all duration-700 ease-out">
+            <span class="tape"></span>
+            <img src="../assets/imagenes/postres/p001_img01_1850x1236.png" alt="Las 4 galletas" class="h-[480px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink-2">las cuatro recetas</div>
+          </div>
+          <div data-story-img="2" class="polaroid absolute inset-0 opacity-0 transition-all duration-700 ease-out" style="transform: rotate(3deg) translateY(40px);">
+            <span class="tape" style="background:rgba(164,130,58,.6);"></span>
+            <img src="../assets/imagenes/catalogo/p001_img02_3380x5070.jpeg" alt="La familia" class="h-[480px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink-2">la mesa familiar</div>
+          </div>
+          <div data-story-img="3" class="polaroid absolute inset-0 opacity-0 transition-all duration-700 ease-out" style="transform: rotate(-4deg) translateY(40px);">
+            <span class="tape"></span>
+            <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake" class="h-[480px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-red">probada y aprobada</div>
+          </div>
+          <div data-story-img="4" class="polaroid absolute inset-0 opacity-0 transition-all duration-700 ease-out" style="transform: rotate(2deg) translateY(40px);">
+            <span class="tape" style="background:rgba(185,34,20,0.55);"></span>
+            <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada" class="h-[480px] object-cover" />
+            <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink-2">para celebrar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: story beats -->
+      <div class="space-y-32 py-20">
+        <div class="beat is-active" data-story-beat="1">
+          <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 12</div>
+          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+            Todo empieza en una <span class="font-hand text-red italic">cocina pequeña</span>.
+          </h3>
+          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+            La abuela no usaba balanza ni cronómetro. Medía con las manos, sentía la masa, escuchaba el horno. Cada receta de este cuaderno nace de ese instinto.
+          </p>
+        </div>
+        <div class="beat" data-story-beat="2">
+          <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 27</div>
+          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+            Una mesa que siempre tiene <span class="font-hand text-red italic">espacio para uno más</span>.
+          </h3>
+          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+            Las recetas se compartían sin recelo, anotadas en servilletas y al margen de los libros. Esa generosidad es lo que cocinamos hoy.
+          </p>
+        </div>
+        <div class="beat" data-story-beat="3">
+          <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 54</div>
+          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+            Probada y aprobada por <span class="font-hand text-red italic">tres generaciones</span>.
+          </h3>
+          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+            Cada producto pasa por la prueba más exigente: la de la familia. Si no le gusta a la abuela, no sale del cuaderno.
+          </p>
+        </div>
+        <div class="beat" data-story-beat="4">
+          <div class="font-type text-xs uppercase tracking-[.3em] text-red mb-3">Página 88</div>
+          <h3 class="font-display text-4xl lg:text-5xl leading-tight text-ink">
+            Para celebrar lo de siempre <span class="font-hand text-red italic">como nunca</span>.
+          </h3>
+          <p class="mt-5 text-lg leading-relaxed text-ink-2 font-serif">
+            Postres para los días grandes y galletas para los pequeños. Una marca completa con una sola alma — y muchas mesas que la esperan.
+          </p>
+          <a href="#galletas" class="mt-8 inline-flex items-center gap-2 font-hand text-3xl text-red hover:text-red-2 transition">
+            Sigue al capítulo 2 →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPÍTULO 2: HORIZONTAL SCROLL GALLETAS -->
+<section id="galletas" class="paper-deep relative py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 mb-12">
+    <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo II —</div>
+    <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+      Cuatro recetas, <span class="font-hand text-red italic">una obsesión</span>.
+    </h2>
+    <p class="mt-4 font-serif text-lg text-ink-2 max-w-2xl">Cada galleta tiene su propia tarjeta de recetas. Desliza →</p>
+  </div>
+
+  <div id="horizontal-pin" class="relative">
+    <div id="horizontal-track" class="flex gap-10 px-6 lg:px-10 will-change-transform">
+      <!-- Recipe Card 1 -->
+      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[-1deg]">
+        <div class="flex items-start justify-between mb-5">
+          <div>
+            <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 01</div>
+            <h3 class="font-hand text-5xl text-red mt-1">Cookie Monster</h3>
+            <div class="font-type text-xs text-muted mt-1">85 g · relleno 100% Nutella</div>
+          </div>
+          <span class="font-display text-4xl text-ink">$2.50</span>
+        </div>
+        <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
+          <img src="../assets/imagenes/postres/p001_img02_761x760.jpeg" class="w-full h-full object-cover" alt="Cookie Monster" />
+          <div class="absolute top-3 right-3 bg-red text-cream font-hand text-lg px-3 py-1 rounded-full rotate-6">¡azul!</div>
+        </div>
+        <div class="font-hand text-xl text-ink-2 leading-tight">
+          "Galleta juguetona — azul vibrante, ojitos de chocolate, lluvia de líneas cremosas. La favorita de los chicos."
+        </div>
+        <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
+          <span class="font-type text-xs text-muted">Apto: niños · regalos</span>
+          <button class="magnetic font-serif italic text-red hover:text-red-2 min-h-[44px] px-3 -mr-3">Agregar →</button>
+        </div>
+      </article>
+      <!-- Recipe Card 2 -->
+      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[1deg]">
+        <div class="flex items-start justify-between mb-5">
+          <div>
+            <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 02</div>
+            <h3 class="font-hand text-5xl text-red mt-1">Red Velvet</h3>
+            <div class="font-type text-xs text-muted mt-1">85 g · frosting de queso crema</div>
+          </div>
+          <span class="font-display text-4xl text-ink">$2.50</span>
+        </div>
+        <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
+          <img src="../assets/imagenes/postres/p001_img03_761x760.jpeg" class="w-full h-full object-cover" alt="Red Velvet" />
+          <div class="absolute top-3 right-3 bg-ink text-cream font-hand text-lg px-3 py-1 rounded-full -rotate-3">¡vistosa!</div>
+        </div>
+        <div class="font-hand text-xl text-ink-2 leading-tight">
+          "Miga aterciopelada estilo pastel red velvet, centro de frosting y filigranas de chocolate. Un capricho elegante."
+        </div>
+        <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
+          <span class="font-type text-xs text-muted">Apto: cumpleaños · café</span>
+          <button class="magnetic font-serif italic text-red hover:text-red-2 min-h-[44px] px-3 -mr-3">Agregar →</button>
+        </div>
+      </article>
+      <!-- Recipe Card 3 -->
+      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[-1deg]">
+        <div class="flex items-start justify-between mb-5">
+          <div>
+            <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 03</div>
+            <h3 class="font-hand text-5xl text-red mt-1">Zanahoria</h3>
+            <div class="font-type text-xs text-muted mt-1">85 g · estilo carrot cake</div>
+          </div>
+          <span class="font-display text-4xl text-ink">$2.50</span>
+        </div>
+        <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
+          <img src="../assets/imagenes/postres/p001_img04_766x765.jpeg" class="w-full h-full object-cover" alt="Zanahoria" />
+          <div class="absolute top-3 right-3 bg-gold text-cream font-hand text-lg px-3 py-1 rounded-full rotate-3">¡balanceada!</div>
+        </div>
+        <div class="font-hand text-xl text-ink-2 leading-tight">
+          "Trocitos de zanahoria, avena, nueces tostadas. Dulzor justo y centro de frosting para el toque goloso."
+        </div>
+        <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
+          <span class="font-type text-xs text-muted">Apto: tarde · oficina</span>
+          <button class="magnetic font-serif italic text-red hover:text-red-2 min-h-[44px] px-3 -mr-3">Agregar →</button>
+        </div>
+      </article>
+      <!-- Recipe Card 4 -->
+      <article class="recipe-card w-[420px] shrink-0 p-8 rotate-[1deg]">
+        <div class="flex items-start justify-between mb-5">
+          <div>
+            <div class="font-type text-xs uppercase tracking-wider text-muted">Receta Nº 04</div>
+            <h3 class="font-hand text-5xl text-red mt-1">Clásica</h3>
+            <div class="font-type text-xs text-muted mt-1">85 g · chispas de chocolate negro</div>
+          </div>
+          <span class="font-display text-4xl text-ink">$2.50</span>
+        </div>
+        <div class="aspect-square bg-cream rounded-lg overflow-hidden mb-5 relative">
+          <img src="../assets/imagenes/postres/p001_img05_761x760.jpeg" class="w-full h-full object-cover" alt="Clásica" />
+          <div class="absolute top-3 right-3 bg-coffee text-cream font-hand text-lg px-3 py-1 rounded-full -rotate-6">¡eterna!</div>
+        </div>
+        <div class="font-hand text-xl text-ink-2 leading-tight">
+          "Mantequillosa, dorada, con chispas de chocolate negro. Un clásico reconfortante que nunca falla."
+        </div>
+        <div class="mt-4 pt-4 border-t border-dashed border-ink/20 flex items-center justify-between">
+          <span class="font-type text-xs text-muted">Apto: siempre</span>
+          <button class="magnetic font-serif italic text-red hover:text-red-2 min-h-[44px] px-3 -mr-3">Agregar →</button>
+        </div>
+      </article>
+      <!-- Cajas card -->
+      <article class="bg-ink text-cream w-[420px] shrink-0 p-10 rounded-lg shadow-2xl">
+        <div class="font-type text-xs uppercase tracking-wider text-gold">— Empaques —</div>
+        <h3 class="font-hand text-5xl text-cream mt-2">¿Cuántas te llevas?</h3>
+        <div class="mt-8 space-y-5">
+          <div class="flex items-end justify-between pb-3 border-b border-cream/15">
+            <div>
+              <div class="font-serif italic text-xl">Por unidad</div>
+              <div class="font-type text-xs text-cream/60">cualquier sabor</div>
+            </div>
+            <div class="font-display text-3xl">$2.50</div>
+          </div>
+          <div class="flex items-end justify-between pb-3 border-b border-cream/15">
+            <div>
+              <div class="font-serif italic text-xl">Caja pareja · 4</div>
+              <div class="font-type text-xs text-cream/60">$2.35 c/u</div>
+            </div>
+            <div class="font-display text-3xl">$9.40</div>
+          </div>
+          <div class="flex items-end justify-between bg-red/20 -mx-4 px-4 py-3 rounded">
+            <div>
+              <div class="font-serif italic text-xl">Caja familiar · 6</div>
+              <div class="font-type text-xs text-gold">⭐ la más popular · $2.25 c/u</div>
+            </div>
+            <div class="font-display text-3xl text-gold">$13.50</div>
+          </div>
+        </div>
+        <a href="#contacto" class="mt-8 magnetic w-full inline-flex justify-center items-center gap-2 bg-cream text-ink font-serif italic px-6 py-3 rounded-full hover:bg-gold transition">
+          Pedir mi caja →
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CAPÍTULO 3: POSTRES - FEATURED -->
+<section id="postres" class="paper-bg py-32 relative overflow-hidden">
+  <div class="stain" style="top:5%; right:-50px;"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-16">
+      <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo III —</div>
+      <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+        Postres para <span class="font-hand text-red italic">celebrar</span>.
+      </h2>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-14">
+      <article class="card-3d group" data-card-3d>
+        <div class="polaroid w-full" style="padding-bottom:50px;">
+          <span class="tape"></span>
+          <img src="../assets/imagenes/postres/p004_img03_1536x1024.jpeg" alt="Cheesecake NY" class="h-[420px] object-cover" />
+          <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink-2">cheesecake n.y.</div>
+        </div>
+        <div class="mt-8">
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="font-display text-3xl text-ink">Cheesecake estilo Nueva York</h3>
+            <span class="font-display text-4xl text-red">$25</span>
+          </div>
+          <p class="mt-3 font-serif text-lg text-ink-2 leading-relaxed">
+            Horneado al estilo neoyorquino: textura compacta y sedosa, base de galleta mantequillosa. Coronado con frutos rojos para un contraste perfecto.
+          </p>
+          <div class="mt-4 font-type text-xs uppercase tracking-wider text-muted">8 a 12 porciones · pedido con 48h</div>
+        </div>
+      </article>
+      <article class="card-3d group" data-card-3d>
+        <div class="polaroid w-full" style="padding-bottom:50px;">
+          <span class="tape" style="background:rgba(185,34,20,0.55);"></span>
+          <img src="../assets/imagenes/postres/p005_img02_1020x715.jpeg" alt="Mojada chocolate" class="h-[420px] object-cover" />
+          <div class="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-red">mojada de choco</div>
+        </div>
+        <div class="mt-8">
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="font-display text-3xl text-ink">Mojada de Chocolate</h3>
+            <span class="font-display text-4xl text-red">$25</span>
+          </div>
+          <p class="mt-3 font-serif text-lg text-ink-2 leading-relaxed">
+            Bizcocho de cacao extra húmedo con baño brillante y centro de fudge de chocolate 65%. Decorado con frutos rojos que equilibran la intensidad.
+          </p>
+          <div class="mt-4 font-type text-xs uppercase tracking-wider text-muted">8 a 12 porciones · pedido con 48h</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE TYPEWRITER -->
+<section class="paper-deep py-28 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+    <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-6">— Anotación al margen —</div>
+    <blockquote class="font-display text-3xl lg:text-5xl leading-snug text-ink">
+      <span id="typewriter-text" class="type-cursor"></span>
+    </blockquote>
+    <div class="mt-8 font-hand text-2xl text-red">— de la abuela, en la página 1</div>
+  </div>
+</section>
+
+<!-- CAPÍTULO 4: MARCAS COMO SELLOS POSTALES -->
+<section id="marcas" class="paper-bg py-28 relative">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-16">
+      <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">— Capítulo IV —</div>
+      <h2 class="font-display text-5xl lg:text-7xl text-ink leading-tight">
+        Las cinco <span class="font-hand text-red italic">casas</span>.
+      </h2>
+      <p class="mt-5 font-serif text-lg text-ink-2 max-w-2xl mx-auto">Cada marca es una rama de la misma cocina. Coleccionables como sellos postales.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div class="post-stamp rotate-[-2deg] hover:rotate-0 transition-transform">
+        <div class="text-center py-2">
+          <div class="font-type text-[10px] uppercase tracking-wider text-muted">Ecuador · 2025</div>
+          <div class="font-display text-4xl text-red mt-2">Grön</div>
+          <div class="font-hand text-lg text-ink-2 -mt-1">panadería</div>
+          <div class="mt-3 text-xs font-serif italic text-muted leading-tight">"Un arte del grano en tu paladar"</div>
+        </div>
+      </div>
+      <div class="post-stamp rotate-[3deg] hover:rotate-0 transition-transform">
+        <div class="text-center py-2">
+          <div class="font-type text-[10px] uppercase tracking-wider text-muted">Ecuador · 2025</div>
+          <div class="font-display text-4xl text-red mt-2">Kúa</div>
+          <div class="font-hand text-lg text-ink-2 -mt-1">cárnicos</div>
+          <div class="mt-3 text-xs font-serif italic text-muted leading-tight">"Cortes marinados con recetas únicas"</div>
+        </div>
+      </div>
+      <div class="post-stamp rotate-[-1deg] hover:rotate-0 transition-transform">
+        <div class="text-center py-2">
+          <div class="font-type text-[10px] uppercase tracking-wider text-muted">Ecuador · 2025</div>
+          <div class="font-display text-3xl text-red mt-2">Morifruti</div>
+          <div class="font-hand text-lg text-ink-2 -mt-1">mermeladas</div>
+          <div class="mt-3 text-xs font-serif italic text-muted leading-tight">"Conservas naturales con frutos reales"</div>
+        </div>
+      </div>
+      <div class="post-stamp rotate-[2deg] hover:rotate-0 transition-transform">
+        <div class="text-center py-2">
+          <div class="font-type text-[10px] uppercase tracking-wider text-muted">Ecuador · 2025</div>
+          <div class="font-display text-4xl text-red mt-2">Piñaji</div>
+          <div class="font-hand text-lg text-ink-2 -mt-1">encurtidos</div>
+          <div class="mt-3 text-xs font-serif italic text-muted leading-tight">"Sabor auténtico de conserva"</div>
+        </div>
+      </div>
+      <div class="post-stamp rotate-[-3deg] hover:rotate-0 transition-transform">
+        <div class="text-center py-2">
+          <div class="font-type text-[10px] uppercase tracking-wider text-muted">Ecuador · 2025</div>
+          <div class="font-display text-3xl text-red mt-2">Del Bosque</div>
+          <div class="font-hand text-lg text-ink-2 -mt-1">agua</div>
+          <div class="mt-3 text-xs font-serif italic text-muted leading-tight">"Pura, de la naturaleza"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISTRIBUIDORES -->
+<section class="paper-deep py-20 relative">
+  <div class="max-w-6xl mx-auto px-6 lg:px-10 text-center">
+    <div class="font-type text-xs uppercase tracking-[.3em] text-muted mb-3">Donde encontrarnos</div>
+    <h3 class="font-display text-3xl lg:text-4xl text-ink mb-12">Distribuidores de confianza</h3>
+    <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 items-center font-display text-2xl text-muted">
+      <span class="hover:text-red transition">Marriott</span>
+      <span class="opacity-30">·</span>
+      <span class="hover:text-red transition">El Merkato</span>
+      <span class="opacity-30">·</span>
+      <span class="hover:text-red transition">Zolo</span>
+      <span class="opacity-30">·</span>
+      <span class="hover:text-red transition">D'ley</span>
+      <span class="opacity-30">·</span>
+      <span class="hover:text-red transition">Familia</span>
+      <span class="opacity-30">·</span>
+      <span class="hover:text-red transition">Corpus</span>
+    </div>
+  </div>
+</section>
+
+<!-- CAPÍTULO 5: CTA WAX SEAL LETTER -->
+<section id="contacto" class="paper-bg py-32 relative overflow-hidden">
+  <div class="stain" style="top:10%; left:50%; transform:translateX(-50%);"></div>
+  <div class="max-w-3xl mx-auto px-6 lg:px-10 relative">
+    <div class="bg-cream border border-ink/15 rounded-sm p-10 lg:p-16 shadow-2xl relative">
+      <div class="absolute -top-8 -right-8 wax-seal" style="width:110px; height:110px; font-size:20px;">
+        A&amp;L
+      </div>
+      <div class="font-type text-xs uppercase tracking-[.3em] text-muted">— Carta para ti —</div>
+      <h2 class="font-display text-5xl lg:text-7xl text-ink mt-4 leading-[1.05]">
+        Tu mesa, <span class="font-hand text-red italic">nuestra tradición</span>.
+      </h2>
+      <p class="mt-6 font-serif text-lg text-ink-2 leading-relaxed">
+        Escribe lo que necesitas para tu reunión, regalo o evento. Te responderemos con cariño — y con tiempo, como manda la abuela.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="https://wa.me/593997448167" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-3 bg-ink text-cream font-serif italic text-lg px-8 py-4 rounded-full hover:bg-red transition">
+          WhatsApp · 099 744 8167
+        </a>
+        <a href="mailto:contacto@comdelbosque.com" class="magnetic inline-flex items-center gap-3 border-2 border-ink text-ink font-serif italic text-lg px-8 py-4 rounded-full hover:bg-ink hover:text-cream transition">
+          Escríbenos por email
+        </a>
+      </div>
+      <div class="mt-12 pt-6 border-t border-ink/10 font-hand text-xl text-red">
+        — con cariño, de la abuela y el lobo
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-cream/80 py-16 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-4 gap-10">
+    <div>
+      <div class="font-hand text-4xl text-cream">A&amp;L</div>
+      <div class="font-serif text-sm mt-1">D' La Abuela y el Lobo</div>
+      <p class="mt-5 text-sm leading-relaxed text-cream/60">Productos artesanales hechos con tiempo, en Ecuador. Volumen I de las recetas heredadas.</p>
+    </div>
+    <div>
+      <h4 class="font-type text-xs uppercase tracking-wider text-gold mb-4">Las casas</h4>
+      <ul class="space-y-2 text-sm">
+        <li class="font-hand text-xl"><a class="hover:text-gold" href="#">Grön</a></li>
+        <li class="font-hand text-xl"><a class="hover:text-gold" href="#">Kúa</a></li>
+        <li class="font-hand text-xl"><a class="hover:text-gold" href="#">Morifruti</a></li>
+        <li class="font-hand text-xl"><a class="hover:text-gold" href="#">Piñaji</a></li>
+        <li class="font-hand text-xl"><a class="hover:text-gold" href="#">Del Bosque</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-type text-xs uppercase tracking-wider text-gold mb-4">El cuaderno</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a class="hover:text-gold" href="#capitulo-1">Cap. 1 · Historia</a></li>
+        <li><a class="hover:text-gold" href="#galletas">Cap. 2 · Galletas</a></li>
+        <li><a class="hover:text-gold" href="#postres">Cap. 3 · Postres</a></li>
+        <li><a class="hover:text-gold" href="#marcas">Cap. 4 · Marcas</a></li>
+        <li><a class="hover:text-gold" href="#contacto">Cap. 5 · Pedidos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-type text-xs uppercase tracking-wider text-gold mb-4">Contacto</h4>
+      <ul class="space-y-2 text-sm">
+        <li>099 744 8167</li>
+        <li>contacto@comdelbosque.com</li>
+        <li>www.comdelbosque.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-12 max-w-7xl mx-auto px-6 lg:px-10 pt-6 border-t border-cream/10 flex justify-between text-xs text-cream/40">
+    <span>© 2026 D' La Abuela y el Lobo</span>
+    <span class="font-hand text-base">hecho con tiempo, sin tendencias.</span>
+  </div>
+</footer>
+
+<script>
+  // ============ SMOOTH SCROLL (Lenis - defensive) ============
+  let lenis = null;
+  try {
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        smoothTouch: false,
+      });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+  } catch (e) { console.warn('Lenis failed, falling back to native scroll', e); }
+
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  if (lenis) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // ============ PROGRESS BAR ============
+  const progress = document.getElementById('progress');
+  ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top top',
+    end: 'bottom bottom',
+    onUpdate: self => { progress.style.width = (self.progress * 100) + '%'; }
+  });
+
+  // ============ CURSOR ============
+  const cursor = document.getElementById('cursor');
+  let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+  window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+  function cursorLoop() {
+    curX += (mouseX - curX) * 0.18;
+    curY += (mouseY - curY) * 0.18;
+    cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(cursorLoop);
+  }
+  cursorLoop();
+  document.querySelectorAll('a, button, .magnetic').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('large'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('large'));
+  });
+
+  // ============ MAGNETIC BUTTONS ============
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      gsap.to(btn, { x: x * 0.25, y: y * 0.25, duration: 0.4, ease: 'power2.out' });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.3)' });
+    });
+  });
+
+  // ============ HERO REVEAL ============
+  // Split text into chars
+  document.querySelectorAll('[data-split]').forEach(el => {
+    const text = el.textContent;
+    el.textContent = '';
+    [...text].forEach(char => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? ' ' : char;
+      el.appendChild(span);
+    });
+    el.classList.add('split-text');
+  });
+
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.to('[data-split] span', { opacity: 1, y: 0, rotate: 0, duration: 0.7, stagger: 0.025, ease: 'back.out(1.6)' })
+    .from('[data-hero-tag]', { opacity: 0, y: 12, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, '-=0.6')
+    .from('[data-hero-p]', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .from('[data-hero-cta]', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .from('[data-polaroid="1"]', { opacity: 0, rotate: -20, x: -80, duration: 0.9, ease: 'power3.out' }, '-=0.6')
+    .from('[data-polaroid="2"]', { opacity: 0, rotate: 20, x: 80, duration: 0.9, ease: 'power3.out' }, '-=0.7')
+    .from('[data-polaroid="3"]', { opacity: 0, rotate: -15, y: 80, duration: 0.9, ease: 'power3.out' }, '-=0.7');
+
+  // Polaroid parallax on scroll
+  gsap.to('[data-polaroid="1"]', { y: -60, rotation: -10, scrollTrigger: { trigger: 'section', start: 'top top', end: '+=600', scrub: 1 }});
+  gsap.to('[data-polaroid="2"]', { y: -100, rotation: 14, scrollTrigger: { trigger: 'section', start: 'top top', end: '+=600', scrub: 1 }});
+  gsap.to('[data-polaroid="3"]', { y: -40, rotation: -8, scrollTrigger: { trigger: 'section', start: 'top top', end: '+=600', scrub: 1 }});
+
+  // ============ STICKY STORYTELLING ============
+  const beats = gsap.utils.toArray('[data-story-beat]');
+  const storyImgs = gsap.utils.toArray('[data-story-img]');
+  beats.forEach((beat, i) => {
+    ScrollTrigger.create({
+      trigger: beat,
+      start: 'top 55%',
+      end: 'bottom 45%',
+      onEnter: () => activateBeat(i),
+      onEnterBack: () => activateBeat(i),
+    });
+  });
+  function activateBeat(i) {
+    beats.forEach((b, idx) => b.classList.toggle('is-active', idx === i));
+    storyImgs.forEach((img, idx) => {
+      gsap.to(img, {
+        opacity: idx === i ? 1 : 0,
+        rotate: idx === i ? 0 : (idx % 2 === 0 ? -4 : 4),
+        y: idx === i ? 0 : 40,
+        duration: 0.7, ease: 'power3.out'
+      });
+    });
+  }
+
+  // ============ HORIZONTAL SCROLL (desktop only) ============
+  ScrollTrigger.matchMedia({
+    "(min-width: 1024px)": function() {
+      const track = document.getElementById('horizontal-track');
+      if (track) {
+        const totalWidth = track.scrollWidth - window.innerWidth + 80;
+        gsap.to(track, {
+          x: -totalWidth,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#horizontal-pin',
+            pin: true,
+            start: 'top 80px',
+            end: () => '+=' + totalWidth,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          }
+        });
+      }
+    },
+    "(max-width: 1023px)": function() {
+      // On mobile: enable native horizontal scroll
+      const pin = document.getElementById('horizontal-pin');
+      if (pin) pin.style.overflowX = 'auto';
+    }
+  });
+
+  // ============ 3D CARDS ============
+  document.querySelectorAll('[data-card-3d]').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      gsap.to(card.querySelector('.polaroid'), {
+        rotateY: px * 12,
+        rotateX: -py * 12,
+        duration: 0.5,
+        ease: 'power2.out',
+        transformPerspective: 1000,
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card.querySelector('.polaroid'), { rotateY: 0, rotateX: 0, duration: 0.7, ease: 'power3.out' });
+    });
+  });
+
+  // ============ TYPEWRITER ============
+  const tw = document.getElementById('typewriter-text');
+  const twText = '"No seguimos tendencias. Seguimos el instinto y la memoria del paladar."';
+  let twIndex = 0;
+  ScrollTrigger.create({
+    trigger: tw,
+    start: 'top 65%',
+    once: true,
+    onEnter: () => {
+      const iv = setInterval(() => {
+        tw.textContent = twText.slice(0, twIndex++);
+        if (twIndex > twText.length) clearInterval(iv);
+      }, 38);
+    }
+  });
+
+  // ============ REVEAL ON SCROLL ============
+  document.querySelectorAll('.recipe-card, .post-stamp, [data-card-3d]').forEach(el => {
+    gsap.from(el, {
+      opacity: 0, y: 40,
+      duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
+    });
+  });
+
+  // ============ MOBILE MENU ============
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function openMenu() { mobileMenu.classList.add('open'); if (lenis) lenis.stop(); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('open'); if (lenis) lenis.start(); document.body.style.overflow = ''; }
+  if (menuToggle) menuToggle.addEventListener('click', openMenu);
+  if (menuClose) menuClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('[data-menu-link]').forEach(l => l.addEventListener('click', closeMenu));
+
+  // ============ LAZY LOAD non-hero images ============
+  document.querySelectorAll('img').forEach((img, i) => {
+    if (i > 2) img.loading = 'lazy';
+  });
+</script>
+</body>
+</html>
